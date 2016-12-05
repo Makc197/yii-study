@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 class BooksController extends Controller
 {
     /**
-     * @inheritdoc
+//     * @inheritdoc
      */
     public function behaviors()
     {
