@@ -37,6 +37,10 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionTest() {
+        var_dump(Yii::$app->user->can('viewOwn', ['model' => $model]));
+    }
+
     /**
      * @inheritdoc
      */

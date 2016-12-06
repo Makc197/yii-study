@@ -2,43 +2,24 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-/**
- * This is the model class for table "users".
- *
- * @property integer $id
- * @property integer $role_id
- * @property string $forename
- * @property string $surname
- * @property string $username
- * @property string $password
- * @property string $token
- *
- * @property UserRoles $role
- */
-class Users extends \yii\db\ActiveRecord
+class Users extends ActiveRecord implements IdentityInterface
 {
-    /**
-     * @inheritdoc
-     */
+
     public static function tableName()
     {
         return 'users';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            [['role_id'], 'integer'],
-            [['forename', 'surname', 'username', 'password', 'token'], 'required'],
-            [['forename', 'surname', 'username', 'token'], 'string', 'max' => 32],
+            [['username', 'password'], 'required'],
+            [['username'], 'string', 'max' => 32],
             [['password'], 'string', 'max' => 50],
             [['username'], 'unique'],
-            [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserRoles::className(), 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
 
@@ -49,20 +30,29 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'role_id' => 'Role ID',
-            'forename' => 'Имя',
-            'surname' => 'Фамилия',
             'username' => 'Логин',
             'password' => 'Пароль',
-            'token' => 'Token',
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRole()
+    public function validatePassword($password)
     {
-        return $this->hasOne(UserRoles::className(), ['id' => 'role_id']);
+        return $this->password === $password;
     }
+
+    public static function findIdentity($id) {
+        return self::findOne($id);
+    }
+
+    public static function findByUsername($username) {
+        return self::findOne(['username'=>$username]);
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getAuthKey(){}
+    public function validateAuthKey($authKey){}
+    public static function findIdentityByAccessToken($token, $type = null){}
 }

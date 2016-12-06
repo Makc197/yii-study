@@ -7,6 +7,7 @@ use app\models\Books;
 use app\models\BooksSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -14,9 +15,7 @@ use yii\filters\VerbFilter;
  */
 class BooksController extends Controller
 {
-    /**
-//     * @inheritdoc
-     */
+
     public function behaviors()
     {
         return [
@@ -51,8 +50,13 @@ class BooksController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        if (!Yii::$app->user->can('view', ['model' => $model]))
+            throw new ForbiddenHttpException('Вам нельзя просматривать эту книгу');
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -65,8 +69,10 @@ class BooksController extends Controller
     {
         $model = new Books();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->id;
+            if ($model->save())
+                return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
