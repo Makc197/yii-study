@@ -11,6 +11,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
+    //public $layout = 'custom';
     /**
      * @inheritdoc
      */
@@ -37,9 +39,6 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionTest() {
-        var_dump(Yii::$app->user->can('viewOwn', ['model' => $model]));
-    }
 
     /**
      * @inheritdoc
@@ -64,6 +63,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        //$this->layout = 'custom';
         return $this->render('index');
     }
 

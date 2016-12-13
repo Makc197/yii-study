@@ -7,7 +7,13 @@ use yii\helpers\Html;
 
 class SearchWidget extends Widget
 {
-    public $text; 
+    const WITH_SELECT = 'with_select';
+    
+    const SIMPLE = 'simple';
+    
+    public $text;
+    
+    public $type;
     
     public function init()
     {
@@ -17,6 +23,12 @@ class SearchWidget extends Widget
 
     public function run()
     {
-        return $this->render('search_form',['text' => $this->text]);
+        switch($this->type){
+            case self::WITH_SELECT:
+                return $this->render('search_form_select',['text' => $this->text ]);
+            case self::SIMPLE:
+            default:
+                return $this->render('search_form',['text' => $this->text ]);                
+        }        
     }
 }

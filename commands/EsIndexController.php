@@ -7,16 +7,18 @@ use app\models\Cds;
 use app\models\Books;
 use app\models\Products;
 use Elasticsearch\ClientBuilder;
+use app\config\ElasticSearchConfig;
 
 class EsIndexController Extends Controller {
+
 
     public $client;
     
     const PART_SIZE = 5;
-
+			
     public function actionUpdateBooks() {
         $n = 0;
-        $this->client = ClientBuilder::create()->build();
+        $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
         //$books = Books::find()->asArray()->all();
         $num_rows = Books::find()->count();
         $num_parts = $num_rows / self::PART_SIZE;
@@ -45,7 +47,7 @@ class EsIndexController Extends Controller {
 
     public function actionUpdateCds() {
         $n = 0;
-        $this->client = ClientBuilder::create()->build();
+        $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
         $num_rows = Cds::find()->count();
         $num_parts = $num_rows / self::PART_SIZE;
 
@@ -72,7 +74,7 @@ class EsIndexController Extends Controller {
 
     public function actionUpdateProducts() {
         $n = 0;
-        $this->client = ClientBuilder::create()->build();
+        $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
         $num_rows = Products::find()->count();
         $num_parts = $num_rows / self::PART_SIZE;
 

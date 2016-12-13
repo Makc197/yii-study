@@ -72,7 +72,10 @@ AppAsset::register($this);
                 ],
             ]);  ?>
 
-            <?= SearchWidget::widget(['text' => '']); ?>   
+            <?= SearchWidget::widget([
+                'text' => '', 
+                'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple'
+                ]); ?>   
 
             <?php NavBar::end(); ?>
 

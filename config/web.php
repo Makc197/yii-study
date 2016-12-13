@@ -7,6 +7,16 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'auth' => ['username' => 'elastic', 'password' => 'changeme'],
+            'nodes' => [
+                [
+                    'http_address' => '127.0.0.1:9200',
+                ]
+                // configure more hosts if you have a cluster
+            ],
+        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],

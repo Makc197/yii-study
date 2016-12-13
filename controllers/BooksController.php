@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
 class BooksController extends Controller
 {
 
+    //public $layout = 'custom';
+
     public function behaviors()
     {
         return [

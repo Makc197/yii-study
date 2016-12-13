@@ -73,3 +73,18 @@ I: Connecting to configured address/port: localhost:9000.
 E: Time-out connecting to client. :-(
 Log closed at 2016-12-06 14:39:26
 
+Log opened at 2016-12-12 14:54:08
+I: Connecting to configured address/port: localhost:9000.
+E: Time-out connecting to client. :-(
+Log closed at 2016-12-12 14:54:08
+
+Log opened at 2016-12-12 14:54:28
+I: Connecting to configured address/port: localhost:9000.
+E: Time-out connecting to client. :-(
+Log closed at 2016-12-12 14:54:28
+
+Log opened at 2016-12-12 16:39:34
+I: Connecting to configured address/port: localhost:9000.
+E: Time-out connecting to client. :-(
+Log closed at 2016-12-12 16:39:35
+
