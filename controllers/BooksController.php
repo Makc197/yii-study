@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Books;
 use app\models\BooksSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
@@ -13,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * BooksController implements the CRUD actions for Books model.
  */
-class BooksController extends Controller
+class BooksController extends _BaseController
 {
 
     //public $layout = 'custom';

@@ -5,14 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Cds;
 use app\models\CdsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * CdsController implements the CRUD actions for Cds model.
  */
-class CdsController extends Controller
+class CdsController extends _BaseController
 {
     /**
      * @inheritdoc

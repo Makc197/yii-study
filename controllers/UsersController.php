@@ -5,14 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Users;
 use app\models\UsersSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * UsersController implements the CRUD actions for Users model.
  */
-class UsersController extends Controller
+class UsersController extends _BaseController
 {
     /**
      * @inheritdoc

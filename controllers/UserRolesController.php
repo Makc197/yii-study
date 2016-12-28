@@ -5,14 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\UserRoles;
 use app\models\UserRolesSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * UserRolesController implements the CRUD actions for UserRoles model.
  */
-class UserRolesController extends Controller
+class UserRolesController extends _BaseController
 {
     /**
      * @inheritdoc

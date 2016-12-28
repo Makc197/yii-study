@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
 use Elasticsearch\ClientBuilder;
 use yii\data\ArrayDataProvider;
 use app\config\ElasticSearchConfig;
@@ -11,7 +10,7 @@ use app\models\CdsElasticSearch;
 use app\models\ProductsElasticSearch;
 use app\models\ElasticSearch;
 
-class SearchController extends Controller {
+class SearchController extends _BaseController {
 
     public $client;
 

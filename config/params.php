@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'theme' => 'main',
     'adminEmail' => 'admin@example.com',
     'es_hosts' => [
     	[
