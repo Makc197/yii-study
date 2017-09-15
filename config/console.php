@@ -17,22 +17,30 @@ $config = [
         ],
         'log' => [
             'targets' => [
-                [
+                    [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'db' => $db,
-    ],
-    'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'auth' => ['username' => 'elastic', 'password' => 'changeme'],
+            'nodes' => [
+                    ['http_address' => '127.0.0.1:9200'],
+            // configure more hosts if you have a cluster
+            ],
         ],
     ],
-    */
+    'params' => $params,
+ /*
+  'controllerMap' => [
+  'fixture' => [ // Fixture generation command line.
+  'class' => 'yii\faker\FixtureController',
+  ],
+  ],
+ */
 ];
 
 if (YII_ENV_DEV) {

@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use yii\web\Controller;
 use yii\elasticsearch\ActiveRecord;
-use yii\data\ArrayDataProvider;
 
 class ElasticSearch extends ActiveRecord {
 
