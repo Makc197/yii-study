@@ -8,7 +8,7 @@ class BooksElasticSearch extends ActiveRecord {
 
     public function rules() {
         return [
-                [['id', 'user_id', 'type', 'title', 'description', 'price', 'author', 'numpages'], 'required']
+                [['id', 'user_id', 'type', 'title', 'description', 'price', 'author', 'numpages'], 'safe']
         ];
     }
 
@@ -28,19 +28,27 @@ class BooksElasticSearch extends ActiveRecord {
      * @return array This model's mapping
      */
     public static function mapping() {
+
         return [
             static::type() => [
                 'properties' => [
-                    'id' => ['id' => 'integer', "index" => "analyzed", "store" => "yes"],
-                    'type' => ['type' => 'string'],
-                    'title' => ['title' => 'string'],
-                    'description' => ['description' => 'string'],
-//                    'price' => ['price' => 'double'],
-                    'author' => ['type' => 'string'],
-                    'numpages' => ['type' => 'long'],
                 ]
             ],
         ];
+
+//        return [
+//            static::type() => [
+//                'properties' => [
+//                    'id' => ['type' => 'integer', 'index' => 'analyzed', 'store' => 'yes'],
+//                    'type' => ['type' => 'string'],
+//                    'title' => ['type' => 'string'],
+//                    'description' => ['type' => 'string', 'store' => 'yes'],
+//                    'price' => ['type' => 'double'],
+//                    'author' => ['type' => 'string'],
+//                    'numpages' => ['type' => 'integer'],
+//                ]
+//            ],
+//        ];
     }
 
     public static function setUpMapping() {
@@ -60,13 +68,13 @@ class BooksElasticSearch extends ActiveRecord {
         $command->setMapping(static::index(), static::type(), [
             static::type() => [
                 'properties' => [
-                    'id' => ['id' => 'integer', "index" => "analyzed", "store" => "yes"],
+                    'id' => ['type' => 'integer'],
                     'type' => ['type' => 'string'],
-                    'title' => ['title' => 'string'],
-                    'description' => ['description' => 'string'],
-//                    'price' => ['price' => 'double'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'price' => ['type' => 'double'],
                     'author' => ['type' => 'string'],
-                    'numpages' => ['type' => 'long'],
+                    'numpages' => ['type' => 'integer'],
                 ]
             ],
         ]);
@@ -88,8 +96,6 @@ class BooksElasticSearch extends ActiveRecord {
     public static function createIndex() {
         $db = static::getDb();
         $command = $db->createCommand();
-
-
         $command->createIndex(static::index(), [
             //'settings' => [ /* ... */],
             'mappings' => static::mapping(),

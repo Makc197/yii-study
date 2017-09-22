@@ -19,36 +19,41 @@ class EsIndexController Extends Controller {
 
         $esbook = new BooksElasticSearch();
         $esbook::deleteIndex();
-        echo 'deleteIndex complete';
+        echo 'deleteIndex complete' . "\n";
 //        die;
-        
+
         $esbook::createIndex();
-        echo 'createIndex complete';
-        die;
-        
+        echo 'createIndex complete' . "\n";
+//        die;
+
         $num_rows = Books::find()->count();
+
+        echo "Count of books for index: " . $num_rows . "\n";
+//        die;
+
         $num_parts = $num_rows / self::PART_SIZE;
 
+        echo $num_parts . '\n';
+
         for ($i = 0; $i < $num_parts; $i++) {
-            $books = Books::find()->asArray()->limit(self::PART_SIZE)->offset($i * self::PART_SIZE)->all();
+
+            $books = Books::find()->limit(self::PART_SIZE)->offset($i * self::PART_SIZE)->all();
 
             echo ($i + 1) . '/' . $num_parts . " ======================================";
 
             foreach ($books as $book) {
                 ++$n;
                 echo "\n" . $n . "\n";
-                
+
                 $esbook = new BooksElasticSearch();
+//              $esbook->load([(new \ReflectionClass($esbook))->getShortName() => $book->attributes]);
+//              $esbook->load([$esbook->formName() => $book->attributes]);
+//              $esbook->attributes = $book->attributes;
+                $esbook->setAttributes($book->attributes, false);
+                
 
-                $esbook->id = $book->id;
-                $esbook->type = $book->type;
-                $esbook->title = $book->title;
-                $esbook->description = $book->description;
-//                $esbook->price = $book->price;
-                $esbook->author = $book->author;
-                $esbook->numpages = $book->numpages;
-
-                $esbook->save();
+                var_dump($esbook->author);
+                $esbook->save(false);
             }
         }
     }
@@ -56,7 +61,21 @@ class EsIndexController Extends Controller {
     public function actionUpdateCds() {
         $n = 0;
 //      $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
+
+        $escd = new CdsElasticSearch();
+        $escd::deleteIndex();
+        echo 'deleteIndex complete' . "\n";
+        die;
+
+        $escd::createIndex();
+        echo 'createIndex complete' . "\n";
+//        die;
+
         $num_rows = Cds::find()->count();
+
+        echo "Count of books for index: " . $num_rows . "\n";
+//        die;
+
         $num_parts = $num_rows / self::PART_SIZE;
 
         for ($i = 0; $i < $num_parts; $i++) {
@@ -67,7 +86,6 @@ class EsIndexController Extends Controller {
             foreach ($cds as $cd) {
                 ++$n;
                 echo "\n" . $n . "\n";
-                
             }
         }
     }
@@ -75,7 +93,21 @@ class EsIndexController Extends Controller {
     public function actionUpdateProducts() {
         $n = 0;
 //        $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
+
+        $esproduct = new ProductsElasticSearch();
+        $esproduct::deleteIndex();
+        echo 'deleteIndex complete' . "\n";
+        die;
+
+        $esproduct::createIndex();
+        echo 'createIndex complete' . "\n";
+//        die;
+
         $num_rows = Products::find()->count();
+
+        echo "Count of books for index: " . $num_rows . "\n";
+//        die;
+
         $num_parts = $num_rows / self::PART_SIZE;
 
         for ($i = 0; $i < $num_parts; $i++) {
@@ -86,7 +118,6 @@ class EsIndexController Extends Controller {
             foreach ($products as $value) {
                 ++$n;
                 echo "\n" . $n . "\n";
-                
             }
         }
     }
