@@ -6,6 +6,11 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+    ],
     'components' => [
         'elasticsearch' => [
             'class' => 'yii\elasticsearch\Connection',
@@ -14,15 +19,18 @@ $config = [
                 [
                     'http_address' => '127.0.0.1:9200',
                 ]
-                // configure more hosts if you have a cluster
+// configure more hosts if you have a cluster
             ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => md5('TRHf456'),
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -37,14 +45,14 @@ $config = [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+// 'useFileTransport' to false and configure a transport
+// for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                    [
+                [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
@@ -55,8 +63,14 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['api/cd' => 'api/cd'],
+                    'controller' => ['api/book' => 'api/book'],
+                    'controller' => ['api/product' => 'api/product'],
+                ],
             ],
-        ],
+        ]
     ],
     'params' => $params,
 ];
