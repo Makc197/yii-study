@@ -66,9 +66,15 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['api/cd' => 'api/cd'],
-                    'controller' => ['api/book' => 'api/book'],
-                    'controller' => ['api/product' => 'api/product'],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['api/book' => 'api/book'],
+                ],
+				[
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['api/product' => 'api/product'],
+                ],  
             ],
         ]
     ],

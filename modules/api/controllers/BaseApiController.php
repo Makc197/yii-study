@@ -20,7 +20,8 @@ abstract class BaseApiController extends ActiveController {
                     'http://yii-study',
                     'http://mysite.loc',
 					'http://localhost:8080',
-					'http://vue-js-first-app'
+					'http://vue-js-first-app',
+					"*"
                 ],
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
                 'Access-Control-Request-Headers' => ['Authorization', 'Content-Type'],
