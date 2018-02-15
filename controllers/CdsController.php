@@ -6,18 +6,18 @@ use Yii;
 use app\models\Cds;
 use app\models\CdsSearch;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * CdsController implements the CRUD actions for Cds model.
  */
-class CdsController extends _BaseController
-{
+class CdsController extends _BaseController {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -32,8 +32,7 @@ class CdsController extends _BaseController
      * Lists all Cds models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new CdsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,10 +47,13 @@ class CdsController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
+        $model = $this->findModel($id);
+        if (!Yii::$app->user->can('reader'))
+            throw new ForbiddenHttpException('Вам нельзя просматривать этот товар');
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -60,8 +62,7 @@ class CdsController extends _BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Cds();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,8 +80,7 @@ class CdsController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,8 +98,7 @@ class CdsController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -112,12 +111,12 @@ class CdsController extends _BaseController
      * @return Cds the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Cds::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

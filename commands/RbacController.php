@@ -86,5 +86,11 @@ class RbacController extends Controller {
 
     $auth->addChild($admin, $delete);
     $auth->addChild($author, $deleteOwn);
+    
+    // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
+    // обычно реализуемый в модели User.
+    $auth->assign($book_reader, 3);
+    $auth->assign($reader, 2);
+    $auth->assign($admin, 1);
     }
 }

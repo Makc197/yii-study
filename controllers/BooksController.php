@@ -50,10 +50,9 @@ class BooksController extends _BaseController
      * @return mixed
      */
     public function actionView($id)
-    {
+    {       
         $model = $this->findModel($id);
-
-        if (!Yii::$app->user->can('view', ['model' => $model]))
+        if (!Yii::$app->user->can('book_reader'))
             throw new ForbiddenHttpException('Вам нельзя просматривать эту книгу');
 
         return $this->render('view', [
