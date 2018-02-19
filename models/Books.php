@@ -23,6 +23,12 @@ class Books extends \yii\db\ActiveRecord {
     public static function tableName() {
         return 'books';
     }
+    
+    public function behavior() {
+        return [
+        \yii\behaviors\BlameableBehavior::className()
+        ];
+    }
 
     /**
      * @inheritdoc

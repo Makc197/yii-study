@@ -52,6 +52,11 @@ AppAsset::register($this);
                             ['label' => 'Еще одна ссылка', 'url' => ['#']],
                         ],
                     ],
+                    [
+                        'label' => 'Пользователи',
+                        'visible' => Yii::$app->user->can('admin'),
+                        'url' => ['/users']
+                    ]
                 ],
             ]);
 
@@ -59,26 +64,28 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     Yii::$app->user->isGuest ? (
-                            ['label' => 'Login', 'url' => ['/site/login']]
-                            ) : (
-                            '<li>'
-                            . Html::beginForm(['/site/logout'], 'post')
-                            . Html::submitButton(
-                                    'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
-                            )
-                            . Html::endForm()
-                            . '</li>'
-                            )
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                    ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->login . ')', ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
+                    )
                 ],
-            ]);  ?>
+            ]);
+            ?>
 
-            <?= SearchWidget::widget([
-                'text' => '', 
+            <?=
+            SearchWidget::widget([
+                'text' => '',
                 'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple'
-                ]); ?>   
+            ]);
+            ?>   
 
             <?php NavBar::end(); ?>
-
 
             <div class="container">
                 <?=
@@ -86,8 +93,13 @@ AppAsset::register($this);
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-<?= $content ?>
+
+                <h3><?= yii::$app->session->getFlash('regsuccess') == '' ? '' : yii::$app->session->getFlash('regsuccess') ?></h3>
+                <?php var_dump(Yii::$app->user->isGuest); ?>
+                
+                <?= $content ?>
             </div>
+
         </div>
 
         <footer class="footer">
@@ -98,7 +110,7 @@ AppAsset::register($this);
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

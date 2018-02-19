@@ -49,8 +49,8 @@ class CdsController extends _BaseController {
      */
     public function actionView($id) {
         $model = $this->findModel($id);
-        if (!Yii::$app->user->can('reader'))
-            throw new ForbiddenHttpException('Вам нельзя просматривать этот товар');
+//        if (!Yii::$app->user->can('reader'))
+//            throw new ForbiddenHttpException('Вам нельзя просматривать этот товар');
 
         return $this->render('view', [
             'model' => $model,

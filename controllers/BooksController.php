@@ -8,18 +8,43 @@ use app\models\BooksSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * BooksController implements the CRUD actions for Books model.
  */
-class BooksController extends _BaseController
-{
+class BooksController extends _BaseController {
 
     //public $layout = 'custom';
 
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+//              'only' => ['login', 'logout', 'signup'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view'],
+                        'roles' => ['book_reader', 'reader', 'author', 'editor', 'admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['author', 'editor', 'admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['editor', 'admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -33,8 +58,7 @@ class BooksController extends _BaseController
      * Lists all Books models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new BooksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -49,11 +73,10 @@ class BooksController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {       
+    public function actionView($id) {
         $model = $this->findModel($id);
-        if (!Yii::$app->user->can('book_reader'))
-            throw new ForbiddenHttpException('Вам нельзя просматривать эту книгу');
+//        if (!Yii::$app->user->can('book_reader'))
+//            throw new ForbiddenHttpException('Вам нельзя просматривать эту книгу');
 
         return $this->render('view', [
             'model' => $model,
@@ -65,8 +88,7 @@ class BooksController extends _BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Books();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -86,8 +108,7 @@ class BooksController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -105,8 +126,7 @@ class BooksController extends _BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -119,12 +139,12 @@ class BooksController extends _BaseController
      * @return Books the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Books::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

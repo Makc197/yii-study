@@ -15,8 +15,6 @@ class ViewBookRule extends Rule
     {   
         $test = $params['test'];
 
-
-
         return false;
     }
 }

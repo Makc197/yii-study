@@ -3,9 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\User;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends _BaseController
@@ -71,31 +71,28 @@ class SiteController extends _BaseController
      *
      * @return string
      */
-    public function actionLogin()
-    {
+  
+    public function actionLogin() {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect('/');
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        $user = new User();
+        $user->scenario = User::SCENARIO_LOGIN;
+
+        if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+            return $this->redirect('/');
         }
+
         return $this->render('login', [
-            'model' => $model,
+            'model' => $user,
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
-
-        return $this->goHome();
+//      return $this->goHome();
+        return $this->redirect('/');
     }
 
     /**
