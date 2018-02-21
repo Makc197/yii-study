@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\UserRoles;
+use app\models\MyUser;
 
 /**
- * UserRolesSearch represents the model behind the search form about `app\models\UserRoles`.
+ * UserSearch represents the model behind the search form about `app\models\MyUser`.
  */
-class UserRolesSearch extends UserRoles
+class UserSearch extends MyUser
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UserRolesSearch extends UserRoles
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['role_code', 'role_name'], 'safe'],
+            [['id', 'isactive'], 'integer'],
+            [['created', 'lastname', 'firstname', 'middlename', 'login', 'passwhash', 'birthday', 'email', 'emailtoken'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class UserRolesSearch extends UserRoles
      */
     public function search($params)
     {
-        $query = UserRoles::find();
+        $query = MyUser::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +60,18 @@ class UserRolesSearch extends UserRoles
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'created' => $this->created,
+            'birthday' => $this->birthday,
+            'isactive' => $this->isactive,
         ]);
 
-        $query->andFilterWhere(['like', 'role_code', $this->role_code])
-            ->andFilterWhere(['like', 'role_name', $this->role_name]);
+        $query->andFilterWhere(['like', 'lastname', $this->lastname])
+            ->andFilterWhere(['like', 'firstname', $this->firstname])
+            ->andFilterWhere(['like', 'middlename', $this->middlename])
+            ->andFilterWhere(['like', 'login', $this->login])
+            ->andFilterWhere(['like', 'passwhash', $this->passwhash])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'emailtoken', $this->emailtoken]);
 
         return $dataProvider;
     }

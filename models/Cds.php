@@ -15,21 +15,25 @@ use Yii;
  * @property string $author
  * @property double $playlenght
  */
-class Cds extends \yii\db\ActiveRecord
-{
+class Cds extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'cds';
+    }
+
+    public function behavior() {
+        return [
+            \yii\behaviors\BlameableBehavior::className()
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['title', 'description', 'price', 'author', 'playlenght'], 'required'],
             [['price', 'playlenght'], 'number'],
@@ -43,8 +47,7 @@ class Cds extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'type' => 'Тип',
@@ -55,4 +58,5 @@ class Cds extends \yii\db\ActiveRecord
             'playlenght' => 'Длительность',
         ];
     }
+
 }

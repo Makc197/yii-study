@@ -1,4 +1,5 @@
 <?php
+
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
@@ -6,71 +7,41 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Вход';
+$this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="site-login">
+    <h1><?= Html::encode($this->title) ?></h1>
 
-<style> 
-    .checkbox {
-        padding-left: 0px !important;
-    }
-</style>
+    <p>Please fill out the following fields to login:</p>
 
-<?php
-$form = ActiveForm::begin([
-    'method' => 'post',
-    'action' => '/site/login'
-]);
-?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'login-form',
+        'layout' => 'horizontal',
+        'fieldConfig' => [
+            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            'labelOptions' => ['class' => 'col-lg-1 control-label'],
+        ],
+    ]); ?>
 
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <div class="form-group">
-                    <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
-                </div>
-                <div class="form-group">
-                    <?= $form->field($model, 'password')->passwordInput() ?>
-                </div>
+        <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'rememberme')->checkbox() ?>
-                    </div>
+        <?= $form->field($model, 'rememberMe')->checkbox([
+            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+        ]) ?>
 
-                    <div class="col-md-6">
-                        <?= Html::submitButton('Вход', ['class' => 'btn pull-right', 'name' => 'login-button']) ?>                     
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <!--<a href="/user/page-password-reset" class="forgot-password">Забыли пароль?</a>-->
-                        <?= Html::a('Забыли пароль?', '/user/reqres-password', ['class' => 'forgot-password']) ?> 
-                    </div>
-
-                    <div class="col-md-6">
-                        <?= Html::a('Зарегистрироваться', '/user/registration', ['class' => 'btn pull-right', 'name' => 'register-button']) ?>  
-                    </div>
-                </div>
-
-                <!-- Если есть ошибки - выводим модальное окно и отображаем ошибки -->
-                <!-- Рендер модального окна + передаем туда model -->           
-                <!-- Данные, которые кладем в js переменную надо сериализовать --> 
-                <script type="text/javascript">
-                    var modal_error = <?= empty($model->errors) ? 'false' : 'true' ?>,
-                        modal_title = 'Внимание',
-                        modal_error_view = '<?= $this->render('modal_error', compact('model')) ?>';
-                </script>
-
-                <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal">Small modal</button>-->
-
-                <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-11">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
+
+    <?php ActiveForm::end(); ?>
+
+    <div class="col-lg-offset-1" style="color:#999;">
+        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
+        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>
 </div>
-<?php ActiveForm::end(); ?>
-<?= $this->render('modals', ['model' => $model]) ?>

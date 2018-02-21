@@ -42,6 +42,7 @@ class Books extends \yii\db\ActiveRecord {
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 1000],
             [['author'], 'string', 'max' => 200],
+            [['created_by', 'updated_by', 'user_id'],'safe']
         ];
     }
 

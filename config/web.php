@@ -6,10 +6,65 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'modules' => [
+        'rbacadmin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',
+            'mainLayout' => '@app/views/layouts/main.php',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    /* 'userClassName' => 'app\models\MyUser', */
+                    'idField' => 'user_id',
+                    'usernameField' => 'username',
+//                    'fullnameField' => 'profile.full_name',
+//                    'extraColumns' => [
+//                        [
+//                            'attribute' => 'full_name',
+//                            'label' => 'Full Name',
+//                            'value' => function($model, $key, $index, $column) {
+//                                return $model->profile->full_name;
+//                            },
+//                        ],
+//                        [
+//                            'attribute' => 'dept_name',
+//                            'label' => 'Department',
+//                            'value' => function($model, $key, $index, $column) {
+//                                return $model->profile->dept->name;
+//                            },
+//                        ],
+//                        [
+//                            'attribute' => 'post_name',
+//                            'label' => 'Post',
+//                            'value' => function($model, $key, $index, $column) {
+//                                return $model->profile->post->name;
+//                            },
+//                        ],
+//                    ],
+                    'searchClass' => 'mdm\admin\models\searchs\User'
+//                    'searchClass' => 'app\models\UserSearch'
+                ],
+            ],
+        ],
         'api' => [
             'class' => 'app\modules\api\Module',
         ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            '*',
+            'user/*',
+            'site/*',
+//           'rbacadmin/*',
+//           'gii/*',
+        // The actions listed here will be allowed to everyone including guests.
+        // So, 'admin/*' should not appear here in the production, of course.
+        // But in the earlier stages of your development, you may probably want to
+        // add a lot of actions here until you finally completed setting up rbac,
+        // otherwise you may not even take a first step.
+        ]
     ],
     'components' => [
         'elasticsearch' => [
@@ -35,16 +90,23 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+//        Моя реализация
+//        'user' => [
+//            'identityClass' => 'app\models\MyUser',
+//            'enableAutoLogin' => true,
+//        ],
+//        
+//      Реализация mdmsoft/yii2-admin
         'user' => [
-            'identityClass' => 'app\models\Users',
-            'enableAutoLogin' => true,
+            'identityClass' => 'mdm\admin\models\User',
+            'loginUrl' => ['user/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
+// send all mails to a file by default. You have to set
 // 'useFileTransport' to false and configure a transport
 // for the mailer to send real emails.
             'useFileTransport' => true,
@@ -71,10 +133,10 @@ $config = [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['api/book' => 'api/book'],
                 ],
-				[
+                [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['api/product' => 'api/product'],
-                ],  
+                ],
             ],
         ]
     ],

@@ -7,6 +7,10 @@ class m180216_144631_blameable extends Migration {
     public function safeUp() {
         $this->addColumn('books', 'created_by', $this->integer());
         $this->addColumn('books', 'updated_by', $this->integer());
+        $this->addColumn('cds', 'created_by', $this->integer());
+        $this->addColumn('cds', 'updated_by', $this->integer());
+        $this->addColumn('products', 'created_by', $this->integer());
+        $this->addColumn('products', 'updated_by', $this->integer());
     }
 
     public function safeDown() {

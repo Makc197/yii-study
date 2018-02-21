@@ -3,54 +3,129 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\User;
+use mdm\admin\models\form\Login;
+use mdm\admin\models\form\PasswordResetRequest;
+use mdm\admin\models\form\ResetPassword;
+use mdm\admin\models\form\Signup;
+use mdm\admin\models\form\ChangePassword;
+use mdm\admin\models\User;
+use mdm\admin\models\searchs\User as UserSearch;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use yii\base\UserException;
+use yii\mail\BaseMailer;
 
-class UserController extends _BaseController {
+/**
+ * Для использования Модуля mdm yii2-admin
+ * User controller extends \mdm\admin\controllers\UserController
+ */
+class UserController extends \mdm\admin\controllers\UserController {
 
-    //При первой аутентификации - проверка токена, простановка признака Active, удаление токена из БД 
-    public function actionAcceptreg($actkey) {
+    /**
+     * Login
+     * @return string
+     */
+    public function actionLogin() {
+        if (!Yii::$app->getUser()->isGuest) {
+            return $this->goHome();
+        }
 
-        $user = new User(['scenario' => User::SCENARIO_FIRSTACTIVATION]);
-
-        if ($user->userActivate($actkey)) {
-            return $this->redirect('/');
+        $model = new Login();
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('@app/views/login', [
+                'model' => $model,
+            ]);
         }
     }
 
-    //Регистрация нового пользователя
-    public function actionRegistration() {
-        $user = new User(['scenario' => User::SCENARIO_REGISTRATION]);
+    /**
+     * Logout
+     * @return string
+     */
+    public function actionLogout() {
+        Yii::$app->getUser()->logout();
 
-        if ($user->load(Yii::$app->request->post()) && $user->regNewUser()) {
-            return $this->redirect('/');
+        return $this->goHome();
+    }
+
+    /**
+     * Signup new user
+     * @return string
+     */
+    public function actionSignup() {
+        $model = new Signup();
+        if ($model->load(Yii::$app->getRequest()->post())) {
+            if ($user = $model->signup()) {
+                return $this->goHome();
+            }
         }
 
-        return $this->render('create', [
-            'model' => $user,
+        return $this->render('@app/views/signup', [
+            'model' => $model,
         ]);
     }
 
-    //Запрос на смену пароля 
-    public function actionReqresPassword() {
-        $user = new User(['scenario' => User::SCENARIO_RESETPASSWORD]);
+    /**
+     * Request reset password
+     * @return string
+     */
+    public function actionRequestPasswordReset() {
+        $model = new PasswordResetRequest();
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
 
-        if ($user->load(Yii::$app->request->post()) && $user->reqResPassword()) {
-            return $this->redirect('/');
+                return $this->goHome();
+            } else {
+                Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+            }
         }
 
-        return $this->render('password-reset', [
-            'model' => $user,
+        return $this->render('@app/views/requestPasswordResetToken', [
+            'model' => $model,
         ]);
     }
 
-    //Сброс пароля пользователя
-    public function actionPasswordReset($actkey) {
-
-        $user = new User(['scenario' => User::SCENARIO_RESETPASSWORD]);
-
-        if ($user->passwordReset($actkey)) {
-            return $this->redirect('/');
+    /**
+     * Reset password
+     * @return string
+     */
+    public function actionResetPassword($token) {
+        try {
+            $model = new ResetPassword($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
         }
+
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->resetPassword()) {
+            Yii::$app->getSession()->setFlash('success', 'New password was saved.');
+
+            return $this->goHome();
+        }
+
+        return $this->render('@app/views/resetPassword', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Reset password
+     * @return string
+     */
+    public function actionChangePassword() {
+        $model = new ChangePassword();
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->change()) {
+            return $this->goHome();
+        }
+
+        return $this->render('@app/views/change-password', [
+            'model' => $model,
+        ]);
     }
 
 }

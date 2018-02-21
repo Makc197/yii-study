@@ -37,7 +37,7 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
-                    // ['label' => 'Home', 'url' => ['/site/index']],
+                    //['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     [
@@ -52,24 +52,24 @@ AppAsset::register($this);
                             ['label' => 'Еще одна ссылка', 'url' => ['#']],
                         ],
                     ],
-                    [
-                        'label' => 'Пользователи',
-                        'visible' => Yii::$app->user->can('admin'),
-                        'url' => ['/users']
-                    ]
                 ],
             ]);
 
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
+                    [
+                        'label' => 'Админка',
+                        'visible' => Yii::$app->user->can('admin'),
+                        'url' => ['/rbacadmin/user']
+                    ],
                     Yii::$app->user->isGuest ? (
-                    ['label' => 'Login', 'url' => ['/site/login']]
+                    ['label' => 'Login (Гость)', 'url' => ['/user/login']]
                     ) : (
                     '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::beginForm(['/user/logout'], 'post')
                     . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->login . ')', ['class' => 'btn btn-link logout']
+                    'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
                     )
                     . Html::endForm()
                     . '</li>'
@@ -94,9 +94,8 @@ AppAsset::register($this);
                 ])
                 ?>
 
-                <h3><?= yii::$app->session->getFlash('regsuccess') == '' ? '' : yii::$app->session->getFlash('regsuccess') ?></h3>
-                <?php var_dump(Yii::$app->user->isGuest); ?>
-                
+                <h3><?= yii::$app->session->getFlash('regsuccess') == '' ? '' : yii::$app->session->getFlash('regsuccess') ?></h3>                
+
                 <?= $content ?>
             </div>
 

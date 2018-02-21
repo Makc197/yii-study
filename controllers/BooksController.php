@@ -19,32 +19,32 @@ class BooksController extends _BaseController {
 
     public function behaviors() {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-//              'only' => ['login', 'logout', 'signup'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'view'],
-                        'roles' => ['book_reader', 'reader', 'author', 'editor', 'admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['create'],
-                        'roles' => ['author', 'editor', 'admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['update'],
-                        'roles' => ['editor', 'admin'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['delete'],
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+////              'only' => ['login', 'logout', 'signup'],
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['index', 'view'],
+//                        'roles' => ['book_reader', 'reader', 'author', 'editor', 'admin'],
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['create'],
+//                        'roles' => ['author', 'editor', 'admin'],
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['update'],
+//                        'roles' => ['editor', 'admin'],
+//                    ],
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['delete'],
+//                        'roles' => ['admin'],
+//                    ],
+//                ],
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

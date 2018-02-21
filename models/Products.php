@@ -13,21 +13,25 @@ use Yii;
  * @property string $description
  * @property double $price
  */
-class Products extends \yii\db\ActiveRecord
-{
+class Products extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'products';
+    }
+
+    public function behavior() {
+        return [
+            \yii\behaviors\BlameableBehavior::className()
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['title', 'description', 'price'], 'required'],
             [['price'], 'number'],
@@ -40,8 +44,7 @@ class Products extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'type' => 'Тип',
@@ -50,4 +53,5 @@ class Products extends \yii\db\ActiveRecord
             'price' => 'Цена',
         ];
     }
+
 }
