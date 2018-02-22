@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "products".
@@ -13,7 +15,7 @@ use Yii;
  * @property string $description
  * @property double $price
  */
-class Products extends \yii\db\ActiveRecord {
+class Products extends ActiveRecord {
 
     /**
      * @inheritdoc
@@ -22,9 +24,14 @@ class Products extends \yii\db\ActiveRecord {
         return 'products';
     }
 
-    public function behavior() {
+    public function behaviors() {
         return [
-            \yii\behaviors\BlameableBehavior::className()
+            //BlameableBehavior::className()
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
         ];
     }
 

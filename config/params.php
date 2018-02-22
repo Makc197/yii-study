@@ -5,7 +5,7 @@ return [
     'theme' => 'main',
     'adminEmail' => 'admin@example.com',
     'es_hosts' => [
-            [
+        [
             'host' => 'localhost',
             'port' => '9200',
             'user' => 'elastic',
@@ -16,7 +16,7 @@ return [
         'class' => 'yii\elasticsearch\Connection',
         'auth' => ['username' => 'elastic', 'password' => 'changeme'],
         'nodes' => [
-                ['http_address' => '127.0.0.1:9200'],
+            ['http_address' => '127.0.0.1:9200'],
         // configure more hosts if you have a cluster
         ],
     ],

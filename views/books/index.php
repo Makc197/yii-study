@@ -18,12 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Books', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+            // ['class' => 'yii\grid\SerialColumn'],
             'id',
             'type',
             'title',
@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             // 'author',
             // 'numpages',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cds".
@@ -15,7 +17,7 @@ use Yii;
  * @property string $author
  * @property double $playlenght
  */
-class Cds extends \yii\db\ActiveRecord {
+class Cds extends ActiveRecord {
 
     /**
      * @inheritdoc
@@ -24,9 +26,14 @@ class Cds extends \yii\db\ActiveRecord {
         return 'cds';
     }
 
-    public function behavior() {
+    public function behaviors() {
         return [
-            \yii\behaviors\BlameableBehavior::className()
+            //BlameableBehavior::className()
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
         ];
     }
 

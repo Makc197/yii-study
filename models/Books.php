@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "books".
@@ -15,7 +17,7 @@ use Yii;
  * @property string $author
  * @property string $numpages
  */
-class Books extends \yii\db\ActiveRecord {
+class Books extends ActiveRecord {
 
     /**
      * @inheritdoc
@@ -23,10 +25,15 @@ class Books extends \yii\db\ActiveRecord {
     public static function tableName() {
         return 'books';
     }
-    
-    public function behavior() {
+
+    public function behaviors() {
         return [
-        \yii\behaviors\BlameableBehavior::className()
+            //BlameableBehavior::className()
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
         ];
     }
 
@@ -35,14 +42,12 @@ class Books extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['id', 'title', 'description', 'price', 'author', 'numpages'], 'required'],
-            [['id'], 'integer'],
+            [['title', 'description', 'price', 'author', 'numpages'], 'required'],
             [['price', 'numpages'], 'number'],
             [['type'], 'string', 'max' => 30],
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 1000],
-            [['author'], 'string', 'max' => 200],
-            [['created_by', 'updated_by', 'user_id'],'safe']
+            [['author'], 'string', 'max' => 200]
         ];
     }
 

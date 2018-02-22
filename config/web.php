@@ -54,7 +54,7 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*',
+//           '*',
             'user/*',
             'site/*',
 //           'rbacadmin/*',

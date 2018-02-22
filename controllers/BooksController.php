@@ -6,9 +6,8 @@ use Yii;
 use app\models\Books;
 use app\models\BooksSearch;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+//use yii\filters\AccessControl;
 
 /**
  * BooksController implements the CRUD actions for Books model.
@@ -58,7 +57,12 @@ class BooksController extends _BaseController {
      * Lists all Books models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex() 
+    {
+        $auth = Yii::$app->authManager;
+//        var_dump($auth->getRule('')); die;
+//        var_dump(Yii::$app->user->can('isAuthor', [1 => 1])); die;
+        
         $searchModel = new BooksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -91,8 +95,11 @@ class BooksController extends _BaseController {
     public function actionCreate() {
         $model = new Books();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user->id;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            
+//            var_dump(Yii::$app->user->id);
+//            die;
+
             if ($model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
         } else {
