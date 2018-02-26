@@ -12,7 +12,7 @@ use Yii;
 class ModelHelper {
 
     public static function getModel() {
-        $modelname = 'app\models\\' . Yii::$app->controller->id;
+        $modelname = 'app\models\\' . ucfirst(Yii::$app->controller->id);
         $model = new $modelname;
         return $model;
     }

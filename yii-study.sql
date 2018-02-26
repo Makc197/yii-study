@@ -1,5 +1,5 @@
-﻿/*
-MySQL Data Transfer
+/*
+Navicat MySQL Data Transfer
 
 Source Server         : MySQL
 Source Server Version : 50631
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2018-02-22 19:21:10
+Date: 2018-02-26 20:07:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,8 +33,8 @@ CREATE TABLE `auth_assignment` (
 INSERT INTO `auth_assignment` VALUES ('admin', '2', '1518708118');
 INSERT INTO `auth_assignment` VALUES ('author', '4', '1518708118');
 INSERT INTO `auth_assignment` VALUES ('book_manager', '7', '1519301697');
+INSERT INTO `auth_assignment` VALUES ('book_operator', '6', '1519301679');
 INSERT INTO `auth_assignment` VALUES ('book_reader', '3', '1518708118');
-INSERT INTO `auth_assignment` VALUES ('books_operator', '6', '1519301679');
 INSERT INTO `auth_assignment` VALUES ('editor', '5', '1518708118');
 INSERT INTO `auth_assignment` VALUES ('reader', '1', '1519145913');
 
@@ -82,18 +82,18 @@ INSERT INTO `auth_item` VALUES ('/api/product/index', '2', null, null, null, '15
 INSERT INTO `auth_item` VALUES ('/api/product/options', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/api/product/update', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/api/product/view', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/*', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/create', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/delete', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/index', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/update', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/books/view', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/*', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/create', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/delete', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/index', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/update', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/cds/view', '2', null, null, null, '1519225335', '1519225335');
+INSERT INTO `auth_item` VALUES ('/book/*', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/book/create', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/book/delete', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/book/index', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/book/update', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/book/view', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/*', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/create', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/delete', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/index', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/update', '2', null, null, null, '1519657754', '1519657754');
+INSERT INTO `auth_item` VALUES ('/cd/view', '2', null, null, null, '1519657754', '1519657754');
 INSERT INTO `auth_item` VALUES ('/debug/*', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/debug/default/*', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/debug/default/db-explain', '2', null, null, null, '1519225335', '1519225335');
@@ -111,11 +111,12 @@ INSERT INTO `auth_item` VALUES ('/gii/default/diff', '2', null, null, null, '151
 INSERT INTO `auth_item` VALUES ('/gii/default/index', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/gii/default/preview', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/gii/default/view', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('/products/create', '2', null, null, null, '1519228507', '1519228507');
-INSERT INTO `auth_item` VALUES ('/products/delete', '2', null, null, null, '1519295444', '1519295444');
-INSERT INTO `auth_item` VALUES ('/products/index', '2', null, null, null, '1519295414', '1519295414');
-INSERT INTO `auth_item` VALUES ('/products/update', '2', null, null, null, '1519295401', '1519295401');
-INSERT INTO `auth_item` VALUES ('/products/view', '2', null, null, null, '1519295432', '1519295432');
+INSERT INTO `auth_item` VALUES ('/product/*', '2', null, null, null, '1519660676', '1519660676');
+INSERT INTO `auth_item` VALUES ('/product/create', '2', null, null, null, '1519659924', '1519659924');
+INSERT INTO `auth_item` VALUES ('/product/delete', '2', null, null, null, '1519659980', '1519659980');
+INSERT INTO `auth_item` VALUES ('/product/index', '2', null, null, null, '1519659992', '1519659992');
+INSERT INTO `auth_item` VALUES ('/product/update', '2', null, null, null, '1519660005', '1519660005');
+INSERT INTO `auth_item` VALUES ('/product/view', '2', null, null, null, '1519660014', '1519660014');
 INSERT INTO `auth_item` VALUES ('/rbacadmin/*', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/rbacadmin/assignment/*', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/rbacadmin/assignment/assign', '2', null, null, null, '1519225335', '1519225335');
@@ -169,29 +170,28 @@ INSERT INTO `auth_item` VALUES ('/rbacadmin/user/request-password-reset', '2', n
 INSERT INTO `auth_item` VALUES ('/rbacadmin/user/reset-password', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/rbacadmin/user/signup', '2', null, null, null, '1519225335', '1519225335');
 INSERT INTO `auth_item` VALUES ('/rbacadmin/user/view', '2', null, null, null, '1519225335', '1519225335');
-INSERT INTO `auth_item` VALUES ('admin', '1', 'Пользователи с этой ролью могут всё', null, null, '1518708117', '1519307554');
-INSERT INTO `auth_item` VALUES ('author', '1', 'Пользователи с этой ролью могут: \r\nВидеть записи всех категорий (Permission view_all );\r\nCоздавать новые записи во всех категориях (Permission create_all); \r\nРедактировать только свои записи (Permission own_update );\r\nУдалять только свои записи (Permission own_delete);', null, null, '1518708117', '1519314632');
-INSERT INTO `auth_item` VALUES ('book_manager', '1', 'Пользователи с этой ролью могут: просматривать записи в категории Books + создавать и редактировать записи в категории Books (т.е. все что у book_operator) + удалять записи в категории  Books ', null, null, '1519299925', '1519300398');
-INSERT INTO `auth_item` VALUES ('book_reader', '1', 'Пользователи с этой ролью могут: читать записи из категории Книги', null, null, '1518708117', '1519300430');
-INSERT INTO `auth_item` VALUES ('books_operator', '1', 'Пользователи с этой ролью могут просматривать записи в категории Books (т.е. все что у book_reader) + создавать и редактировать записи в категории Books', null, null, '1519299805', '1519314711');
-INSERT INTO `auth_item` VALUES ('create_all', '2', 'Разрешено создавать записи товаров во всех категориях', null, null, '1519314418', '1519314418');
-INSERT INTO `auth_item` VALUES ('create_update_books', '2', 'Разрешено создавать и редактировать записи в категории Книги', null, null, '1518708118', '1519299062');
-INSERT INTO `auth_item` VALUES ('create_update_cds', '2', 'Разрешено создавать и редактировать записи в категории CDs', null, null, '1519228290', '1519297072');
-INSERT INTO `auth_item` VALUES ('create_update_products', '2', 'Разрешено создавать и редактировать записи в категории Products', null, null, '1519228360', '1519307604');
-INSERT INTO `auth_item` VALUES ('delete_all', '2', 'Разрешено удалять записи товаров во всех категориях', null, null, '1519296451', '1519314557');
-INSERT INTO `auth_item` VALUES ('delete_books', '2', 'Разрешено удалять записи в категории Книги', null, null, '1518708118', '1519298985');
-INSERT INTO `auth_item` VALUES ('delete_cds', '2', 'Разрешено удалять записи в категории CDs', null, null, '1519294289', '1519296995');
-INSERT INTO `auth_item` VALUES ('delete_products', '2', 'Разрешено удалять записи в категории Products', null, null, '1519295693', '1519302325');
-INSERT INTO `auth_item` VALUES ('editor', '1', 'Пользователи с этой ролью могут: создавать и редактировать записи во всех категориях', null, null, '1518708117', '1519305486');
-INSERT INTO `auth_item` VALUES ('own_delete', '2', 'Разрешено удалять только свои записи', 'AuthorRule', null, '1518708118', '1519314518');
-INSERT INTO `auth_item` VALUES ('own_update', '2', 'Разрешено редактировать только свои записи', 'AuthorRule', null, '1518708118', '1519314496');
-INSERT INTO `auth_item` VALUES ('own_view', '2', 'Разрешено просматривать только свои записи', null, null, '1518708118', '1519307965');
-INSERT INTO `auth_item` VALUES ('reader', '1', 'Пользователи с этой ролью могут: просматривать записи во всех категориях', null, null, '1518708117', '1519302862');
-INSERT INTO `auth_item` VALUES ('update_all', '2', 'Разрешено редактировать записи о товарах во всех категориях', null, null, '1518708118', '1519314350');
-INSERT INTO `auth_item` VALUES ('view_all', '2', 'Разрешено просматривать записи во всех категориях', null, null, '1519297170', '1519307687');
-INSERT INTO `auth_item` VALUES ('view_books', '2', 'Разрешено просматривать записи в категории Книги', null, null, '1518708118', '1519302106');
-INSERT INTO `auth_item` VALUES ('view_cds', '2', 'Разрешено просматривать записи в категории CDs', null, null, '1519296808', '1519302085');
-INSERT INTO `auth_item` VALUES ('view_products', '2', 'Разрешено просматривать записи в категории Products', null, null, '1519296888', '1519297115');
+INSERT INTO `auth_item` VALUES ('admin', '1', 'Пользователи с этой ролью могут всё', null, null, '1518708117', '1519648442');
+INSERT INTO `auth_item` VALUES ('author', '1', 'Пользователи с этой ролью могут: \r\nВидеть записи всех категорий (Permission view_all );\r\nCоздавать новые записи во всех категориях (Permission create_all); \r\nРедактировать только свои записи (Permission own_update );\r\nУдалять только свои записи (Permission own_delete);', null, null, '1518708117', '1519661110');
+INSERT INTO `auth_item` VALUES ('book_manager', '1', 'Пользователи с этой ролью могут:\r\nПросматривать записи в категории Книги;\r\nСоздавать и редактировать записи в категории Книги\r\n(т.е. все что у book_operator);\r\nУдалять записи в категории  Книги (Permission delete_book)', null, null, '1519299925', '1519661481');
+INSERT INTO `auth_item` VALUES ('book_operator', '1', 'Пользователи с этой ролью могут:\r\nПросматривать записи в категории Книги (т.е. все что у book_reader);\r\nСоздавать и редактировать записи в категории Книги (Permission create_update_book)', null, null, '1519299805', '1519661596');
+INSERT INTO `auth_item` VALUES ('book_reader', '1', 'Пользователи с этой ролью могут: \r\nЧитать записи из категории Книги (Permission view_book)', null, null, '1518708117', '1519661523');
+INSERT INTO `auth_item` VALUES ('create_all', '2', 'Разрешено создавать записи товаров во всех категориях', null, null, '1519314418', '1519657846');
+INSERT INTO `auth_item` VALUES ('create_update_book', '2', 'Разрешено создавать и редактировать записи в категории Книги', null, null, '1518708118', '1519660830');
+INSERT INTO `auth_item` VALUES ('create_update_cd', '2', 'Разрешено создавать и редактировать записи в категории Компакт диски', null, null, '1519228290', '1519660852');
+INSERT INTO `auth_item` VALUES ('create_update_product', '2', 'Разрешено создавать и редактировать записи в категории Прочие товары', null, null, '1519228360', '1519660883');
+INSERT INTO `auth_item` VALUES ('delete_all', '2', 'Разрешено удалять записи товаров во всех категориях', null, null, '1519296451', '1519660267');
+INSERT INTO `auth_item` VALUES ('delete_book', '2', 'Разрешено удалять записи в категории Книги', null, null, '1518708118', '1519660905');
+INSERT INTO `auth_item` VALUES ('delete_cd', '2', 'Разрешено удалять записи в категории Компакт диски', null, null, '1519294289', '1519660927');
+INSERT INTO `auth_item` VALUES ('delete_product', '2', 'Разрешено удалять записи в категории Прочие товары', null, null, '1519295693', '1519660956');
+INSERT INTO `auth_item` VALUES ('editor', '1', 'Пользователи с этой ролью могут: \r\nПросматривать записи во всех категориях (Permission view_all);\r\nСоздавать записи во всех категориях (Permission create_all);\r\nРедактировать записи во всех категориях (Permission update_all);', null, null, '1518708117', '1519662018');
+INSERT INTO `auth_item` VALUES ('own_delete', '2', 'Разрешено удалять только свои записи', 'AuthorRule', null, '1518708118', '1519660253');
+INSERT INTO `auth_item` VALUES ('own_update', '2', 'Разрешено редактировать только свои записи', 'AuthorRule', null, '1518708118', '1519660292');
+INSERT INTO `auth_item` VALUES ('reader', '1', 'Пользователи с этой ролью могут: Просматривать записи во всех категориях (Permission view_all)', null, null, '1518708117', '1519661866');
+INSERT INTO `auth_item` VALUES ('update_all', '2', 'Разрешено редактировать записи о товарах во всех категориях', null, null, '1518708118', '1519660352');
+INSERT INTO `auth_item` VALUES ('view_all', '2', 'Разрешено просматривать записи во всех категориях', null, null, '1519297170', '1519660478');
+INSERT INTO `auth_item` VALUES ('view_book', '2', 'Разрешено просматривать записи в категории Книги', null, null, '1518708118', '1519660996');
+INSERT INTO `auth_item` VALUES ('view_cd', '2', 'Разрешено просматривать записи в категории Компакт диски', null, null, '1519296808', '1519661022');
+INSERT INTO `auth_item` VALUES ('view_product', '2', 'Разрешено просматривать записи в категории Прочие товары', null, null, '1519296888', '1519661060');
 
 -- ----------------------------
 -- Table structure for auth_item_child
@@ -210,55 +210,55 @@ CREATE TABLE `auth_item_child` (
 -- Records of auth_item_child
 -- ----------------------------
 INSERT INTO `auth_item_child` VALUES ('admin', '/*');
-INSERT INTO `auth_item_child` VALUES ('create_all', '/books/create');
-INSERT INTO `auth_item_child` VALUES ('create_update_books', '/books/create');
-INSERT INTO `auth_item_child` VALUES ('delete_all', '/books/delete');
-INSERT INTO `auth_item_child` VALUES ('delete_books', '/books/delete');
-INSERT INTO `auth_item_child` VALUES ('create_update_books', '/books/index');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/books/index');
-INSERT INTO `auth_item_child` VALUES ('view_books', '/books/index');
-INSERT INTO `auth_item_child` VALUES ('create_update_books', '/books/update');
-INSERT INTO `auth_item_child` VALUES ('update_all', '/books/update');
-INSERT INTO `auth_item_child` VALUES ('create_update_books', '/books/view');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/books/view');
-INSERT INTO `auth_item_child` VALUES ('view_books', '/books/view');
-INSERT INTO `auth_item_child` VALUES ('create_all', '/cds/create');
-INSERT INTO `auth_item_child` VALUES ('create_update_cds', '/cds/create');
-INSERT INTO `auth_item_child` VALUES ('delete_all', '/cds/delete');
-INSERT INTO `auth_item_child` VALUES ('delete_cds', '/cds/delete');
-INSERT INTO `auth_item_child` VALUES ('create_update_cds', '/cds/index');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/cds/index');
-INSERT INTO `auth_item_child` VALUES ('view_cds', '/cds/index');
-INSERT INTO `auth_item_child` VALUES ('create_update_cds', '/cds/update');
-INSERT INTO `auth_item_child` VALUES ('update_all', '/cds/update');
-INSERT INTO `auth_item_child` VALUES ('create_update_cds', '/cds/view');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/cds/view');
-INSERT INTO `auth_item_child` VALUES ('view_cds', '/cds/view');
-INSERT INTO `auth_item_child` VALUES ('create_all', '/products/create');
-INSERT INTO `auth_item_child` VALUES ('create_update_products', '/products/create');
-INSERT INTO `auth_item_child` VALUES ('delete_all', '/products/delete');
-INSERT INTO `auth_item_child` VALUES ('delete_products', '/products/delete');
-INSERT INTO `auth_item_child` VALUES ('create_update_products', '/products/index');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/products/index');
-INSERT INTO `auth_item_child` VALUES ('view_products', '/products/index');
-INSERT INTO `auth_item_child` VALUES ('create_update_products', '/products/update');
-INSERT INTO `auth_item_child` VALUES ('update_all', '/products/update');
-INSERT INTO `auth_item_child` VALUES ('view_all', '/products/view');
-INSERT INTO `auth_item_child` VALUES ('view_products', '/products/view');
-INSERT INTO `auth_item_child` VALUES ('books_operator', 'book_reader');
-INSERT INTO `auth_item_child` VALUES ('book_manager', 'books_operator');
+INSERT INTO `auth_item_child` VALUES ('create_all', '/book/create');
+INSERT INTO `auth_item_child` VALUES ('create_update_book', '/book/create');
+INSERT INTO `auth_item_child` VALUES ('delete_all', '/book/delete');
+INSERT INTO `auth_item_child` VALUES ('delete_book', '/book/delete');
+INSERT INTO `auth_item_child` VALUES ('create_update_book', '/book/index');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/book/index');
+INSERT INTO `auth_item_child` VALUES ('view_book', '/book/index');
+INSERT INTO `auth_item_child` VALUES ('create_update_book', '/book/update');
+INSERT INTO `auth_item_child` VALUES ('update_all', '/book/update');
+INSERT INTO `auth_item_child` VALUES ('create_update_book', '/book/view');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/book/view');
+INSERT INTO `auth_item_child` VALUES ('view_book', '/book/view');
+INSERT INTO `auth_item_child` VALUES ('create_all', '/cd/create');
+INSERT INTO `auth_item_child` VALUES ('create_update_cd', '/cd/create');
+INSERT INTO `auth_item_child` VALUES ('delete_all', '/cd/delete');
+INSERT INTO `auth_item_child` VALUES ('delete_cd', '/cd/delete');
+INSERT INTO `auth_item_child` VALUES ('create_update_cd', '/cd/index');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/cd/index');
+INSERT INTO `auth_item_child` VALUES ('view_cd', '/cd/index');
+INSERT INTO `auth_item_child` VALUES ('create_update_cd', '/cd/update');
+INSERT INTO `auth_item_child` VALUES ('update_all', '/cd/update');
+INSERT INTO `auth_item_child` VALUES ('create_update_cd', '/cd/view');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/cd/view');
+INSERT INTO `auth_item_child` VALUES ('view_cd', '/cd/view');
+INSERT INTO `auth_item_child` VALUES ('create_update_product', '/product/create');
+INSERT INTO `auth_item_child` VALUES ('delete_all', '/product/delete');
+INSERT INTO `auth_item_child` VALUES ('delete_product', '/product/delete');
+INSERT INTO `auth_item_child` VALUES ('create_update_product', '/product/index');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/product/index');
+INSERT INTO `auth_item_child` VALUES ('view_product', '/product/index');
+INSERT INTO `auth_item_child` VALUES ('create_update_product', '/product/update');
+INSERT INTO `auth_item_child` VALUES ('update_all', '/product/update');
+INSERT INTO `auth_item_child` VALUES ('view_all', '/product/view');
+INSERT INTO `auth_item_child` VALUES ('view_product', '/product/view');
+INSERT INTO `auth_item_child` VALUES ('book_manager', 'book_operator');
+INSERT INTO `auth_item_child` VALUES ('book_operator', 'book_reader');
 INSERT INTO `auth_item_child` VALUES ('author', 'create_all');
-INSERT INTO `auth_item_child` VALUES ('books_operator', 'create_update_books');
+INSERT INTO `auth_item_child` VALUES ('editor', 'create_all');
+INSERT INTO `auth_item_child` VALUES ('book_operator', 'create_update_book');
 INSERT INTO `auth_item_child` VALUES ('own_delete', 'delete_all');
-INSERT INTO `auth_item_child` VALUES ('book_manager', 'delete_books');
+INSERT INTO `auth_item_child` VALUES ('book_manager', 'delete_book');
 INSERT INTO `auth_item_child` VALUES ('author', 'own_delete');
 INSERT INTO `auth_item_child` VALUES ('author', 'own_update');
 INSERT INTO `auth_item_child` VALUES ('editor', 'update_all');
 INSERT INTO `auth_item_child` VALUES ('own_update', 'update_all');
 INSERT INTO `auth_item_child` VALUES ('author', 'view_all');
-INSERT INTO `auth_item_child` VALUES ('own_view', 'view_all');
+INSERT INTO `auth_item_child` VALUES ('editor', 'view_all');
 INSERT INTO `auth_item_child` VALUES ('reader', 'view_all');
-INSERT INTO `auth_item_child` VALUES ('book_reader', 'view_books');
+INSERT INTO `auth_item_child` VALUES ('book_reader', 'view_book');
 
 -- ----------------------------
 -- Table structure for auth_rule
@@ -278,10 +278,10 @@ CREATE TABLE `auth_rule` (
 INSERT INTO `auth_rule` VALUES ('AuthorRule', 0x4F3A31393A226170705C72756C655C417574686F7252756C65223A333A7B733A343A226E616D65223B733A31303A22417574686F7252756C65223B733A393A22637265617465644174223B693A313531393233303038373B733A393A22757064617465644174223B693A313531393233303130363B7D, '1519230087', '1519230106');
 
 -- ----------------------------
--- Table structure for books
+-- Table structure for book
 -- ----------------------------
-DROP TABLE IF EXISTS `books`;
-CREATE TABLE `books` (
+DROP TABLE IF EXISTS `book`;
+CREATE TABLE `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) NOT NULL DEFAULT 'book',
   `title` varchar(500) NOT NULL,
@@ -292,27 +292,26 @@ CREATE TABLE `books` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of books
+-- Records of book
 -- ----------------------------
-INSERT INTO `books` VALUES ('1', 'book', 'Книга №1', 'Описание книги №1', '123210032433', 'Автор книги №1', '112', '4', '4');
-INSERT INTO `books` VALUES ('2', 'book', 'Книга №2', 'Описание книги №2', '123210032433', 'Автор книги №2', '222', '4', '4');
-INSERT INTO `books` VALUES ('3', 'book', 'Книга №3', 'Описание книги №2', '123210032433', 'Автор книги №2', '333444', '4', '4');
-INSERT INTO `books` VALUES ('5', 'book', 'Test2', 'Test2', '450', 'Test2', '534', '5', '1');
-INSERT INTO `books` VALUES ('6', 'book', 'Test3', 'Test3', '478', 'Test3', '327', '5', '5');
-INSERT INTO `books` VALUES ('7', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
-INSERT INTO `books` VALUES ('8', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
-INSERT INTO `books` VALUES ('9', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
-INSERT INTO `books` VALUES ('10', 'book', 'Test5', 'Test5', '346', 'Test5', '567', '2', '2');
-INSERT INTO `books` VALUES ('11', 'book', 'Test6', 'Test6', '768', 'Test6', '543', '2', '2');
+INSERT INTO `book` VALUES ('1', 'book', 'Книга №1', 'Описание книги №1', '12321444', 'Автор книги №1', '112', '4', '6');
+INSERT INTO `book` VALUES ('3', 'book', 'Книга №3', 'Описание книги №2', '123210032433', 'Автор книги №2', '333444', '4', '4');
+INSERT INTO `book` VALUES ('5', 'book', 'Test2', 'Test2', '450', 'Test2', '534', '5', '1');
+INSERT INTO `book` VALUES ('6', 'book', 'Test3', 'Test3', '478', 'Test3', '327', '5', '5');
+INSERT INTO `book` VALUES ('7', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
+INSERT INTO `book` VALUES ('8', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
+INSERT INTO `book` VALUES ('9', 'book', 'Test4', 'Test4', '234', 'Test4', '567', '5', '5');
+INSERT INTO `book` VALUES ('10', 'book', 'Test5', 'Test5', '346', 'Test5', '567', '2', '2');
+INSERT INTO `book` VALUES ('11', 'book', 'Test6', 'Test6', '768', 'Test6', '543', '2', '2');
 
 -- ----------------------------
--- Table structure for cds
+-- Table structure for cd
 -- ----------------------------
-DROP TABLE IF EXISTS `cds`;
-CREATE TABLE `cds` (
+DROP TABLE IF EXISTS `cd`;
+CREATE TABLE `cd` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) NOT NULL DEFAULT 'cd',
   `title` varchar(500) NOT NULL,
@@ -326,11 +325,11 @@ CREATE TABLE `cds` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of cds
+-- Records of cd
 -- ----------------------------
-INSERT INTO `cds` VALUES ('1', 'cd', 'CD №1', 'Описание CD1', '315', 'Автор CD1', '58', '4', '4');
-INSERT INTO `cds` VALUES ('3', 'cd', 'CD №2', 'Описание ', '122', 'Автор ', '64', '5', '5');
-INSERT INTO `cds` VALUES ('4', 'cd', 'CD №3', 'Описание ', '234', 'Автор ', '61', '4', '4');
+INSERT INTO `cd` VALUES ('1', 'cd', 'CD №1', 'Описание sdfs CD1', '315', 'Автор CD1', '58', '4', '2');
+INSERT INTO `cd` VALUES ('3', 'cd', 'CD №2', 'Описание ', '122', 'Автор ', '64', '5', '5');
+INSERT INTO `cd` VALUES ('4', 'cd', 'CD №3', 'Описание ', '234', 'Автор ', '61', '4', '4');
 
 -- ----------------------------
 -- Table structure for menu
@@ -402,10 +401,10 @@ INSERT INTO `m_user` VALUES ('18', '2018-02-20 16:15:13', 'Author', 'Author', 'A
 INSERT INTO `m_user` VALUES ('19', '2018-02-20 16:16:42', 'Editor', 'Editor', 'Editor', 'editor', '$2y$13$/jsfHd/t0ZxpcN3j6GSFk.yd9tcxRTF8OmE4SnztxwPrVS7cjCdgO', '1983-10-12', 'editor@aaaa.aa', null, '1');
 
 -- ----------------------------
--- Table structure for products
+-- Table structure for product
 -- ----------------------------
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE `products` (
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) NOT NULL DEFAULT 'product',
   `title` varchar(500) NOT NULL,
@@ -417,14 +416,14 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of products
+-- Records of product
 -- ----------------------------
-INSERT INTO `products` VALUES ('1', 'product', 'Товар №1', 'Описание товара №1', '114', '4', '4');
-INSERT INTO `products` VALUES ('21', 'product', 'Товар №2', 'Описание товара ', '123', '4', '4');
-INSERT INTO `products` VALUES ('22', 'product', 'Товар №3', 'Описание товара ', '123', '4', '4');
-INSERT INTO `products` VALUES ('24', 'product', 'Товар №5', 'Описание товара ', '123', '5', '5');
-INSERT INTO `products` VALUES ('25', 'product', 'Товар №6', 'Описание товара ', '123', '5', '5');
-INSERT INTO `products` VALUES ('26', 'product', 'Товар №7', 'Описание товара ', '123', '5', '5');
+INSERT INTO `product` VALUES ('1', 'product', 'Товар №1', 'Описание товара №1', '114', '4', '4');
+INSERT INTO `product` VALUES ('21', 'product', 'Товар sdf №2', 'Описание товара ', '123', '4', '2');
+INSERT INTO `product` VALUES ('22', 'product', 'Товар №3', 'Описание товара ', '123', '4', '4');
+INSERT INTO `product` VALUES ('24', 'product', 'Товар №5', 'Описание товара ', '123', '5', '5');
+INSERT INTO `product` VALUES ('25', 'product', 'Товар №6', 'Описание товара ', '123', '5', '5');
+INSERT INTO `product` VALUES ('26', 'product', 'Товар №7', 'Описание товара ', '123', '5', '5');
 
 -- ----------------------------
 -- Table structure for user

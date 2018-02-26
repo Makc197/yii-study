@@ -5,13 +5,13 @@ namespace app\controllers;
 use Elasticsearch\ClientBuilder;
 use yii\data\ArrayDataProvider;
 //use app\config\ElasticSearchConfig;
-use app\models\BooksElasticSearch;
-use app\models\CdsElasticSearch;
-use app\models\ProductsElasticSearch;
+use app\models\BookElasticSearch;
+use app\models\CdElasticSearch;
+use app\models\ProductElasticSearch;
 use app\models\ElasticSearch;
 use yii\elasticsearch\ActiveDataProvider;
 use yii\elasticsearch\Query;
-use app\models\Books;
+use app\models\Book;
 
 class SearchController extends _BaseController {
 
@@ -32,13 +32,13 @@ class SearchController extends _BaseController {
     public function actionTest() {
 
 
-        $books = Books::find()->asArray()->limit(self::PART_SIZE)->offset($i * self::PART_SIZE)->all();
+        $books = Book::find()->asArray()->limit(self::PART_SIZE)->offset($i * self::PART_SIZE)->all();
 
         foreach ($books as $book) {
             ++$n;
             echo "\n" . $n . "\n";
 
-            $esbook = new BooksElasticSearch();
+            $esbook = new BookElasticSearch();
 
             $esbook->id = $book->id;
             $esbook->type = $book->type;
@@ -50,7 +50,7 @@ class SearchController extends _BaseController {
 
             $esbook->save();
 
-            //$esbookfind = BooksElasticSearch::find()->asArray()->all();
+            //$esbookfind = BookElasticSearch::find()->asArray()->all();
 //            var_dump($esbookfind);
 //            echo '\n';
 //            die;
@@ -87,10 +87,10 @@ class SearchController extends _BaseController {
         $query->source('*'); // _source - fields for results
 
         switch ($t) {
-            case 'books':
-                $query = BooksElasticSearch::find()->query($params);
-                $model = BooksElasticSearch::find()->query($params)->all();
-                $query->from(BooksElasticSearch::index(), BooksElasticSearch::type());
+            case 'book':
+                $query = BookElasticSearch::find()->query($params);
+                $model = BookElasticSearch::find()->query($params)->all();
+                $query->from(BookElasticSearch::index(), BookElasticSearch::type());
                 //execute the query
                 $command = $query->createCommand();
                 $result = $command->search();
@@ -100,14 +100,14 @@ class SearchController extends _BaseController {
 //                die;
                 break;
 
-            case 'cds':
-                $query = CdsElasticSearch::find()->query($params);
-                $model = CdsElasticSearch::find()->query($params)->all();
+            case 'cd':
+                $query = CdElasticSearch::find()->query($params);
+                $model = CdElasticSearch::find()->query($params)->all();
                 break;
 
-            case 'products':
-                $query = ProductsElasticSearch::find()->query($params);
-                $model = ProductsElasticSearch::find()->query($params)->all();
+            case 'product':
+                $query = ProductElasticSearch::find()->query($params);
+                $model = ProductElasticSearch::find()->query($params)->all();
                 break;
 
             case 'all':

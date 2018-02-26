@@ -25,7 +25,7 @@ class AuthorRule extends Rule {
         $modelHelper = ModelHelper::getModel();
         if ($model = $modelHelper::findOne($params['id'])) {
             $created_by = isset($model->created_by) ? $model->created_by : false;
-            return $created_by == $user;
+            return (int) $created_by == (int) $user;
         }
         return false;
     }

@@ -7,5 +7,5 @@ namespace app\modules\api\controllers;
  */
 class CdController extends BaseApiController
 {
-    public $modelClass = 'app\models\Cds';
+    public $modelClass = 'app\models\Cd';
 }

@@ -38,15 +38,15 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
                     //['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => 'О нас', 'url' => ['/site/about']],
+                    ['label' => 'Обратная связь', 'url' => ['/site/contact']],
                     [
                         'label' => 'Список товаров',
                         'visible' => !Yii::$app->user->isGuest,
                         'items' => [
-                            ['label' => 'Книги', 'url' => ['/books']],
-                            ['label' => 'Компакт диски', 'url' => ['/cds']],
-                            ['label' => 'Прочие товары', 'url' => ['/products']],
+                            ['label' => 'Книги', 'url' => ['/book']],
+                            ['label' => 'Компакт диски', 'url' => ['/cd']],
+                            ['label' => 'Прочие товары', 'url' => ['/product']],
                             '<li class="divider"></li>',
                             '<li class="dropdown-header">Категория 2</li>',
                             ['label' => 'Еще одна ссылка', 'url' => ['#']],
@@ -64,12 +64,12 @@ AppAsset::register($this);
                         'url' => ['/rbacadmin/user']
                     ],
                     Yii::$app->user->isGuest ? (
-                    ['label' => 'Login (Гость)', 'url' => ['/user/login']]
+                    ['label' => 'Вход (Гость)', 'url' => ['/user/login']]
                     ) : (
                     '<li>'
                     . Html::beginForm(['/user/logout'], 'post')
                     . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                    'Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
                     )
                     . Html::endForm()
                     . '</li>'
