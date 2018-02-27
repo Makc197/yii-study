@@ -14,10 +14,10 @@ use yii\helpers\Url;
             <div class="form-group">
                 <label for="sel1">Select list:</label>
                 <select class="form-control" name="t">
-                    <option value="all">Везде</option>
-                    <option value="books">Книги</option>
-                    <option value="cds">CD</option>
-                    <option value="products">Прочее</option>         
+<!--                    <option value="all">Везде</option>-->
+                    <option value="book">Книги</option>
+                    <option value="cd">CD</option>
+                    <option value="product">Прочее</option>
                 </select>
             </div>
 
