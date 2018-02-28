@@ -6,7 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'ru-RU',
+    'language' => 'ru',
     'modules' => [
         'rbacadmin' => [
             'class' => 'mdm\admin\Module',
@@ -15,35 +15,11 @@ $config = [
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
-                    /* 'userClassName' => 'app\models\MyUser', */
+//                    'userClassName' => 'app\models\MyUser',
                     'idField' => 'user_id',
                     'usernameField' => 'username',
-//                    'fullnameField' => 'profile.full_name',
-//                    'extraColumns' => [
-//                        [
-//                            'attribute' => 'full_name',
-//                            'label' => 'Full Name',
-//                            'value' => function($model, $key, $index, $column) {
-//                                return $model->profile->full_name;
-//                            },
-//                        ],
-//                        [
-//                            'attribute' => 'dept_name',
-//                            'label' => 'Department',
-//                            'value' => function($model, $key, $index, $column) {
-//                                return $model->profile->dept->name;
-//                            },
-//                        ],
-//                        [
-//                            'attribute' => 'post_name',
-//                            'label' => 'Post',
-//                            'value' => function($model, $key, $index, $column) {
-//                                return $model->profile->post->name;
-//                            },
-//                        ],
-//                    ],
                     'searchClass' => 'mdm\admin\models\searchs\User'
-//                    'searchClass' => 'app\models\UserSearch'
+//                   'searchClass' => 'app\models\UserSearch'
                 ],
             ],
         ],
@@ -67,6 +43,19 @@ $config = [
         ]
     ],
     'components' => [
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages/', // if advanced application, set @frontend/messages
+//                  'sourceLanguage' => 'ru', 'если установлен - не переводит
+                    'fileMap' => [
+                        'rbac-admin' => 'rbac-admin.php',
+                        'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
         'elasticsearch' => [
             'class' => 'yii\elasticsearch\Connection',
             'auth' => ['username' => 'elastic', 'password' => 'changeme'],
@@ -95,7 +84,6 @@ $config = [
 //            'identityClass' => 'app\models\MyUser',
 //            'enableAutoLogin' => true,
 //        ],
-//        
 //      Реализация mdmsoft/yii2-admin
         'user' => [
             'identityClass' => 'mdm\admin\models\User',
