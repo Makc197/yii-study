@@ -8,7 +8,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\components\widgets\SearchWidget;
+use app\components\widgets\SearchWidget\SearchWidget;
+use app\components\widgets\LanguageSwitch\LanguageSwitch;
 use mdm\admin\components\MenuHelper;
 
 AppAsset::register($this);
@@ -38,7 +39,7 @@ AppAsset::register($this);
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
-        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id),
+        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true),
         /*        'items' => [
                     //['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'О нас', 'url' => ['/site/about']],
@@ -74,23 +75,21 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             [
-                'label' => 'Админка',
+                'label' => Yii::t('rbac-admin', 'Admin menu'),
                 'visible' => Yii::$app->user->can('admin'),
                 'url' => ['/rbacadmin/user']
             ],
             Yii::$app->user->isGuest ? (
-            ['label' => 'Вход (Гость)', 'url' => ['/user/login']]
+            ['label' => Yii::t('rbac-admin', 'SignIn') . ' (' . Yii::t('rbac-admin', 'Guest') . ')', 'url' => ['/user/login']]
             ) : (
-                '
-    <li>'
+//                '<li>'.MultiLang::widget(['cssClass'=>'pull-right language']);.'</li>'
+                '<li>'
                 . Html::beginForm(['/user/logout'], 'post')
                 . Html::submitButton(
-                    'Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                    Yii::t('rbac-admin', 'SignOut') . ' (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
-                . '
-    </li>
-    '
+                . '</li>'
             )
         ],
     ]);
@@ -99,9 +98,14 @@ AppAsset::register($this);
     <?=
     SearchWidget::widget([
         'text' => '',
-//        'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple'
+//        'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple
+//        'type' => 'with_select'
         'type' => 'simple'
     ]);
+    ?>
+
+    <?=
+    LanguageSwitch::widget(['cssClass' => 'language nav navbar-right']);
     ?>
 
     <?php NavBar::end(); ?>

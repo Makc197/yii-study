@@ -7,7 +7,7 @@ use yii\helpers\Url;
     
     <!-- Окно поиска по-умолчанию -->
     <div class="form-group">
-      <input type="text" class="form-control" name="q" value="<?= $text; ?>" placeholder="Поиск">
+      <input type="text" class="form-control" name="q" value="<?= $text; ?>" placeholder="<?= Yii::t('rbac-admin','Search')?>">
     </div>
               
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>

@@ -15,11 +15,11 @@ $config = [
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
-//                    'userClassName' => 'app\models\MyUser',
+//                  'userClassName' => 'app\models\MyUser',
                     'idField' => 'user_id',
                     'usernameField' => 'username',
                     'searchClass' => 'mdm\admin\models\searchs\User'
-//                   'searchClass' => 'app\models\UserSearch'
+//                  'searchClass' => 'app\models\UserSearch'
                 ],
             ],
         ],
@@ -35,11 +35,11 @@ $config = [
             'site/*',
 //           'rbacadmin/*',
 //           'gii/*',
-        // The actions listed here will be allowed to everyone including guests.
-        // So, 'admin/*' should not appear here in the production, of course.
-        // But in the earlier stages of your development, you may probably want to
-        // add a lot of actions here until you finally completed setting up rbac,
-        // otherwise you may not even take a first step.
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
         ]
     ],
     'components' => [
@@ -48,7 +48,7 @@ $config = [
                 '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@app/messages/', // if advanced application, set @frontend/messages
-//                  'sourceLanguage' => 'ru', 'если установлен - не переводит
+                    'sourceLanguage' => 'en', // если установлен ru - не переводит, т.к. уже ru
                     'fileMap' => [
                         'rbac-admin' => 'rbac-admin.php',
                         'main' => 'main.php',
@@ -79,7 +79,7 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        Моя реализация
+//        Моя реализация Аутентификации
 //        'user' => [
 //            'identityClass' => 'app\models\MyUser',
 //            'enableAutoLogin' => true,
@@ -112,7 +112,16 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            // заменяем стандартный урл.менеджер на наш.
+            'class' => 'app\components\widgets\LanguageSwitch\components\UrlManager',
+            //список языков на который переводим сайт
+            'languages' => ['ru', 'en'],
+            // показываем идентификатор языка по умолчанию, если false, то при в корне сайта не будет виден идентификатор языка  www.site.com/   , с true – www.site.com/ru
+            'enableDefaultLanguageUrlCode' => true,
+
             'rules' => [
+                '/' => 'site/index',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['api/cd' => 'api/cd'],

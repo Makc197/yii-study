@@ -8,16 +8,16 @@ use yii\helpers\Url;
 
     <!-- Окно поиска по продуктам каталога -->
     <div class="input-group">
-        <input type="text" class="form-control" name="q" value="<?= $text; ?>" placeholder="Поиск по каталогу">
+        <input type="text" class="form-control" name="q" value="<?= $text; ?>" placeholder="<?= Yii::t('rbac-admin','Search')?>">
         <div class="input-group-btn">
 
             <div class="form-group">
                 <label for="sel1">Select list:</label>
                 <select class="form-control" name="t">
 <!--                    <option value="all">Везде</option>-->
-                    <option value="book">Книги</option>
-                    <option value="cd">CD</option>
-                    <option value="product">Прочее</option>
+                    <option value="book"><?= Yii::t('rbac-admin', 'Books')?></option>
+                    <option value="cd"><?= Yii::t('rbac-admin', 'CDs')?></option>
+                    <option value="product"><?= Yii::t('rbac-admin', 'Products')?></option>
                 </select>
             </div>
 

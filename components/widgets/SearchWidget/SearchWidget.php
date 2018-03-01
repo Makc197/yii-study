@@ -1,5 +1,5 @@
 <?php
-namespace app\components\widgets;
+namespace app\components\widgets\SearchWidget;
 
 use Yii;
 use yii\base\Widget;

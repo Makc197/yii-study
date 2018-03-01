@@ -7,7 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CdSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Компакт диски';
+//$this->title = 'Компакт диски';
+$this->title = Yii::t('rbac-admin', 'CDs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cds-index">
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('rbac-admin','Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
