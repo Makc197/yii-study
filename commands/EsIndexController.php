@@ -21,8 +21,8 @@ class EsIndexController Extends Controller
 
         $esbook = new BookElasticSearch();
 
-        $esbook::deleteIndex();
-        echo 'BookElasticSearch deleteIndex complete' . "\n";
+//        $esbook::deleteIndex();
+//        echo 'BookElasticSearch deleteIndex complete' . "\n";
 
         $esbook::createIndex();
         echo 'BookElasticSearch createIndex complete' . "\n";
@@ -59,8 +59,8 @@ class EsIndexController Extends Controller
 
         $escd = new CdElasticSearch();
 
-        $escd::deleteIndex();
-        echo 'CdElasticSearch deleteIndex complete' . "\n";
+//        $escd::deleteIndex();
+//        echo 'CdElasticSearch deleteIndex complete' . "\n";
 
         $escd::createIndex();
         echo 'CdElasticSearch createIndex complete' . "\n";
@@ -90,8 +90,9 @@ class EsIndexController Extends Controller
 //      $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
 
         $esproduct = new ProductElasticSearch();
-        $esproduct::deleteIndex();
-        echo 'ProductElasticSearch deleteIndex complete' . "\n";
+
+//        $esproduct::deleteIndex();
+//        echo 'ProductElasticSearch deleteIndex complete' . "\n";
 
         $esproduct::createIndex();
         echo 'ProductElasticSearch createIndex complete' . "\n";

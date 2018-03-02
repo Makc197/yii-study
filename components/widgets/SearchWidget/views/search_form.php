@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
-<form action="<?=Url::to(['/search/search/']);?>" class="navbar-form navbar-left" role="search">
+<form action="<?=Url::to(['/search/es-search/']);?>" class="navbar-form navbar-left" role="search">
     
     <!-- Окно поиска по-умолчанию -->
     <div class="form-group">

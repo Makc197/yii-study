@@ -99,6 +99,8 @@ class ProductElasticSearch extends ActiveRecord
         ]);
     }
 
+
+
     /**
      * Delete this model's index
      */

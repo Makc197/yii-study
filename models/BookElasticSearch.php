@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\elasticsearch\ActiveRecord;
 
 class BookElasticSearch extends ActiveRecord

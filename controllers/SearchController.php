@@ -75,7 +75,7 @@ class SearchController extends _BaseController {
         return $dataProvider;
     }
 
-    public function actionEssearch($q, $t) {
+    public function actionEsSearch($q, $t='all') {
 
         $params = [
             'match' => [
