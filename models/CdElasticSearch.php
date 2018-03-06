@@ -15,12 +15,12 @@ class CdElasticSearch extends ActiveRecord
 
     public function attributes()
     {
-        return ['id', 'type', 'title', 'description', 'price', 'author'];
+        return ['id', 'type', 'title', 'description', 'price', 'author', 'playlenght'];
     }
 
     public static function index()
     {
-        return 'esdb';
+        return 'cd_all';
     }
 
     public static function type()
@@ -33,10 +33,16 @@ class CdElasticSearch extends ActiveRecord
      */
     public static function mapping()
     {
-
         return [
             static::type() => [
                 'properties' => [
+                    'id' => ['type' => 'integer'],
+                    'type' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'price' => ['type' => 'double'],
+                    'author' => ['type' => 'string'],
+                    'playlenght' => ['type' => 'double'],
                 ]
             ],
         ];
@@ -107,7 +113,7 @@ class CdElasticSearch extends ActiveRecord
     {
         $db = static::getDb();
         $command = $db->createCommand();
-        $command->deleteIndex(static::index(), static::type());
+        $command->deleteIndex(static::index());
     }
 
 

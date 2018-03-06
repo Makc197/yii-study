@@ -21,7 +21,7 @@ class BookElasticSearch extends ActiveRecord
 
     public static function index()
     {
-        return 'esdb';
+        return 'book_all';
     }
 
     public static function type()
@@ -35,15 +35,24 @@ class BookElasticSearch extends ActiveRecord
     public static function mapping()
     {
 
+//        return [
+//            static::type() => [
+//                'properties' => [
+//                ]
+//            ],
+//        ];
+
         return [
             static::type() => [
                 'properties' => [
+                    'id' => ['type' => 'integer'],
+                    'type' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'price' => ['type' => 'double'],
+                    'author' => ['type' => 'string'],
+                    'numpages' => ['type' => 'integer'],
                 ]
-            ],
-        ];
-
-//        return [
-//            static::type() => [
 //                'properties' => [
 //                    'id' => ['type' => 'integer', 'index' => 'analyzed', 'store' => 'yes'],
 //                    'type' => ['type' => 'string'],
@@ -53,8 +62,8 @@ class BookElasticSearch extends ActiveRecord
 //                    'author' => ['type' => 'string'],
 //                    'numpages' => ['type' => 'integer'],
 //                ]
-//            ],
-//        ];
+            ],
+        ];
     }
 
     public static function setUpMapping()
@@ -121,7 +130,7 @@ class BookElasticSearch extends ActiveRecord
     {
         $db = static::getDb();
         $command = $db->createCommand();
-        $command->deleteIndex(static::index(), static::type());
+        $command->deleteIndex(static::index());
     }
 
 }

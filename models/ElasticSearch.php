@@ -7,6 +7,13 @@ use yii\elasticsearch\ActiveRecord;
 class ElasticSearch extends ActiveRecord
 {
 
+    public function rules()
+    {
+        return [
+            [['id', 'type', 'title', 'description', 'price'], 'safe']
+        ];
+    }
+
     public function attributes()
     {
         return ['id', 'type', 'title', 'description', 'price'];
@@ -14,15 +21,15 @@ class ElasticSearch extends ActiveRecord
 
     public static function index()
     {
-        return 'esdb';
+        return '_all';
     }
 
     public static function type()
     {
-        return;
+        return null;
     }
 
-    public static function deleteIndex()
+    public static function deleteAllIndexes()
     {
         $db = static::getDb();
         $command = $db->createCommand();

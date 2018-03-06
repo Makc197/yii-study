@@ -21,7 +21,7 @@ class ProductElasticSearch extends ActiveRecord
 
     public static function index()
     {
-        return 'esdb';
+        return 'product_all';
     }
 
     public static function type()
@@ -38,6 +38,11 @@ class ProductElasticSearch extends ActiveRecord
         return [
             static::type() => [
                 'properties' => [
+                    'id' => ['type' => 'integer'],
+                    'type' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'price' => ['type' => 'double'],
                 ]
             ],
         ];
@@ -100,7 +105,6 @@ class ProductElasticSearch extends ActiveRecord
     }
 
 
-
     /**
      * Delete this model's index
      */
@@ -108,7 +112,7 @@ class ProductElasticSearch extends ActiveRecord
     {
         $db = static::getDb();
         $command = $db->createCommand();
-        $command->deleteIndex(static::index(), static::type());
+        $command->deleteIndex(static::index());
     }
 
 

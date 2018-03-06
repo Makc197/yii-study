@@ -11,9 +11,11 @@ use app\models\ProductElasticSearch;
 use app\models\ElasticSearch;
 use yii\elasticsearch\ActiveDataProvider;
 use yii\elasticsearch\Query;
+use yii\elasticsearch\ActiveQuery;
 use app\models\Book;
 
-class SearchController extends _BaseController {
+class SearchController extends _BaseController
+{
 
     public $client;
 
@@ -24,42 +26,14 @@ class SearchController extends _BaseController {
 //        $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
 //    }
 
-    public function init() {
+    public function init()
+    {
         parent::init();
         $this->client = ClientBuilder::create()->setHosts(\Yii::$app->params['es_hosts'])->build();
     }
 
-    public function actionTest() {
-
-
-        $books = Book::find()->asArray()->limit(self::PART_SIZE)->offset($i * self::PART_SIZE)->all();
-
-        foreach ($books as $book) {
-            ++$n;
-            echo "\n" . $n . "\n";
-
-            $esbook = new BookElasticSearch();
-
-            $esbook->id = $book->id;
-            $esbook->type = $book->type;
-            $esbook->title = $book->title;
-            $esbook->description = $book->description;
-            $esbook->price = $book->price;
-            $esbook->author = $book->author;
-            $esbook->numpages = $book->numpages;
-
-            $esbook->save();
-
-            //$esbookfind = BookElasticSearch::find()->asArray()->all();
-//            var_dump($esbookfind);
-//            echo '\n';
-//            die;
-        }
-
-        return $this->render('test');
-    }
-
-    public function Searches($value) {
+    public function Searches($value)
+    {
         $searchs = $value['search'];
         $query = new Query();
         $db = Elastic::getDb();
@@ -75,7 +49,8 @@ class SearchController extends _BaseController {
         return $dataProvider;
     }
 
-    public function actionEsSearch($q, $t='all') {
+    public function actionEsSearch($q, $t = 'all')
+    {
 
         $params = [
             'match' => [
@@ -83,42 +58,53 @@ class SearchController extends _BaseController {
             ]
         ];
 
-        $query = new Query();
-        $query->source('*'); // _source - fields for results
-
         switch ($t) {
             case 'book':
                 $query = BookElasticSearch::find()->query($params);
-                $model = BookElasticSearch::find()->query($params)->all();
+//                $model = BookElasticSearch::find()->query($params)->all();
                 $query->from(BookElasticSearch::index(), BookElasticSearch::type());
                 //execute the query
                 $command = $query->createCommand();
                 $result = $command->search();
-                
-//                echo "<pre>";
-//                print_r($result);
-//                die;
                 break;
 
             case 'cd':
                 $query = CdElasticSearch::find()->query($params);
-                $model = CdElasticSearch::find()->query($params)->all();
+//                $model = CdElasticSearch::find()->query($params)->all();
+                $query->from(CdElasticSearch::index(), CdElasticSearch::type());
+                //execute the query
+                $command = $query->createCommand();
+                $result = $command->search();
                 break;
 
             case 'product':
                 $query = ProductElasticSearch::find()->query($params);
-                $model = ProductElasticSearch::find()->query($params)->all();
+//                $model = ProductElasticSearch::find()->query($params)->all();
+                $query->from(ProductElasticSearch::index(), ProductElasticSearch::type());
+                //execute the query
+                $command = $query->createCommand();
+                $result = $command->search();
                 break;
 
             case 'all':
+
             default:
                 $query = ElasticSearch::find()->query($params);
-                $model = ElasticSearch::find()->query($params)->all();
-        }
+//                $model = ElasticSearch::find()->query($params)->all();
+                $query->from('_all');
+                //execute the query
+                $command = $query->createCommand();
+                $result = $command->search();
 
-//        echo "<pre>";
-//        var_dump($rows);
-//        die;
+//                $query = new Query();
+//                $query = $query->query($params)->from('_all');
+//                $command = $query->createCommand();
+//                $result = $command->search();
+
+            /*echo "<pre>";
+            var_dump($result);
+            die;*/
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -139,7 +125,8 @@ class SearchController extends _BaseController {
         ]);
     }
 
-    public function actionOldSearch($q) {
+    public function actionOldSearch($q)
+    {
 
         $params = [
             'index' => 'esdb',
@@ -153,9 +140,6 @@ class SearchController extends _BaseController {
         ];
 
         $response = $this->client->search($params);
-//        echo "<pre>";
-//        var_dump($response);
-//        die;
         $result = $response['hits']['hits'];
 
         $dataProvider = new ArrayDataProvider([
