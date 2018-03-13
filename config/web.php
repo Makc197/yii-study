@@ -89,6 +89,19 @@ $config = [
             'identityClass' => 'mdm\admin\models\User',
             'loginUrl' => ['user/login'],
         ],
+        //Перенаправляем вьюхи с @mdm/admin/views/user на свои вьюхи @app/views
+//        'view' => [
+//            'theme' => [
+//                'pathMap' => [
+//                    '@mdm/admin/views/user' => '@app/views',
+////                    '@mdm/admin/views/user/login' => '@app/views/login',
+////                    '@mdm/admin/views/user/signup' => '@app/views/signup',
+////                    '@mdm/admin/views/user/requestPasswordResetToken' => '@app/views/requestPasswordResetToken',
+////                    '@mdm/admin/views/user/resetPassword' => '@app/views/resetPassword',
+////                    '@mdm/admin/views/user/change-password' => '@app/views/change-password',
+//                ]
+//            ]
+//        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

@@ -120,10 +120,10 @@ AppAsset::register($this);
         <h3><?= yii::$app->session->getFlash('regsuccess') == '' ? '' : yii::$app->session->getFlash('regsuccess') ?></h3>
 
         <div>
+<!--        <php echo Yii::getAlias('@mdm/admin/views/user/login');>-->
             <?= $content ?>
         </div>
 
-        <!-- <// $content ?> -->
     </div>
 
 </div>
