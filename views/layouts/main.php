@@ -13,6 +13,25 @@ use app\components\widgets\LanguageSwitch\LanguageSwitch;
 use mdm\admin\components\MenuHelper;
 
 AppAsset::register($this);
+//Left Menu
+//$leftmenuarr = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true);
+
+$leftmenuarr = [
+    ['label' => 'Home', 'url' => ['/site/index']],
+    ['label' => 'О нас', 'url' => ['/site/about']],
+    ['label' => 'Обратная связь', 'url' => ['/site/contact']],
+    [
+        'label' => 'Список товаров',
+        'visible' => !Yii::$app->user->isGuest,
+        'items' => [
+            ['label' => 'Книги', 'url' => ['/book']],
+            ['label' => 'Компакт диски', 'url' => ['/cd']],
+            ['label' => 'Прочие товары', 'url' => ['/product']],
+            ['label' => 'Еще одна ссылка', 'url' => ['#']],
+        ],
+    ]
+];
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -111,17 +130,30 @@ AppAsset::register($this);
     <?php NavBar::end(); ?>
 
     <div class="container">
-        <?=
-        Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ])
-        ?>
 
-        <h3><?= yii::$app->session->getFlash('regsuccess') == '' ? '' : yii::$app->session->getFlash('regsuccess') ?></h3>
+        <div class="row">
 
-        <div>
-<!--        <php echo Yii::getAlias('@mdm/admin/views/user/login');>-->
-            <?= $content ?>
+            <?php if ($leftmenuarr) : ?>
+                <div class="col-sm-3">
+                    <?php echo Nav::widget([
+                        'options' => ['class' => 'nav-stacked'],
+                        'items' => $leftmenuarr,
+                    ]); ?>
+                </div>
+            <?php endif ?>
+
+            <div class="col-sm-<?= $leftmenuarr ? '9' : '12' ?>">
+                <?php echo Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]); ?>
+                <h3>
+                    <?= Yii::$app->session->getFlash('regsuccess') == '' ? '' : Yii::$app->session->getFlash('regsuccess'); ?>
+                </h3>
+                <div>
+                    <?= $content ?>
+                </div>
+            </div>
+
         </div>
 
     </div>
