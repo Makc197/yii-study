@@ -11,26 +11,53 @@ use app\assets\AppAsset;
 use app\components\widgets\SearchWidget\SearchWidget;
 use app\components\widgets\LanguageSwitch\LanguageSwitch;
 use mdm\admin\components\MenuHelper;
+use kartik\sidenav\SideNav;
 
 AppAsset::register($this);
-//Left Menu
-//$leftmenuarr = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true);
 
+//Left Menu
+
+//Массив товаров сгенеренный модулем mdm-admin
+$goods = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true)[0];
+
+// Добавление иконки glyphicon в массив
+isset($goods) ? $goods['icon'] = 'folder-open' : '';
+
+//Гененерим полный массив для меню
 $leftmenuarr = [
-    ['label' => 'Home', 'url' => ['/site/index']],
-    ['label' => 'О нас', 'url' => ['/site/about']],
-    ['label' => 'Обратная связь', 'url' => ['/site/contact']],
     [
-        'label' => 'Список товаров',
-        'visible' => !Yii::$app->user->isGuest,
+        'url' => '/site/index',
+        'label' => 'Home',
+        'icon' => 'home'
+    ],
+//    [
+//        'url' => '/site/index',
+//        'label' => 'Goods',
+//        'icon' => 'circle-arrow-right',
+//        'items' => [
+//            ['label' => 'Книги', 'url' => '/book'],
+//            ['label' => 'Компакт диски', 'url' => '/cd'],
+//            ['label' => 'Прочие товары', 'url' => '/product'],
+//        ],
+//    ],
+//  В центре нашего меню добавим каталог товаров
+    $goods,
+    [
+        'label' => 'Help',
+        'icon' => 'question-sign',
         'items' => [
-            ['label' => 'Книги', 'url' => ['/book']],
-            ['label' => 'Компакт диски', 'url' => ['/cd']],
-            ['label' => 'Прочие товары', 'url' => ['/product']],
-            ['label' => 'Еще одна ссылка', 'url' => ['#']],
+            ['label' => 'About', 'icon' => 'info-sign', 'url' => '/site/about'],
+            ['label' => 'Contact', 'icon' => 'phone', 'url' => '/site/contact'],
         ],
-    ]
+    ],
 ];
+
+//Убираем пустые элементы из массива
+function emptyArrayElement($arr){
+    return (!empty($arr));
+}
+
+$leftmenuarr=array_filter($leftmenuarr, "emptyArrayElement");
 
 ?>
 <?php $this->beginPage() ?>
@@ -59,36 +86,7 @@ $leftmenuarr = [
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true),
-        /*        'items' => [
-                    //['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'О нас', 'url' => ['/site/about']],
-                    ['label' => 'Обратная связь', 'url' => ['/site/contact']],
-                    [
-                        'label' => 'Список товаров',
-                        'visible' => !Yii::$app->user->isGuest,
-                        'items' => [
-                            ['label' => 'Книги', 'url' => ['/book']],
-                            ['label' => 'Компакт диски', 'url' => ['/cd']],
-                            ['label' => 'Прочие товары', 'url' => ['/product']],
-                            '<li class="divider"></li>',
-                            '<li class="dropdown-header">Категория 2</li>',
-                            ['label' => 'Еще одна ссылка', 'url' => ['#']],
-                        ],
-                    ],
-                ],*/
     ]);
-
-    /*    $callback = function ($menu) {
-            $data = eval($menu['data']);
-            return [
-                'label' => $menu['name'],
-                'url' => [$menu['route']],
-                'options' => $data,
-                'items' => $menu['children']
-            ];
-        };
-
-        $items = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, $callback);*/
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -133,19 +131,25 @@ $leftmenuarr = [
 
         <div class="row">
 
-            <?php if ($leftmenuarr) : ?>
+            <?php if ($leftmenuarr && $this->context->module->id!='rbacadmin') : ?>
                 <div class="col-sm-3">
-                    <?php echo Nav::widget([
-                        'options' => ['class' => 'nav-stacked'],
+                    <?php
+                     // Displays SideNav menu
+                    echo SideNav::widget([
+                        'type' => SideNav::TYPE_DEFAULT,
+                        'heading' => 'Menu',
                         'items' => $leftmenuarr,
-                    ]); ?>
+                    ]);
+                    ?>
                 </div>
             <?php endif ?>
 
-            <div class="col-sm-<?= $leftmenuarr ? '9' : '12' ?>">
-                <?php echo Breadcrumbs::widget([
+            <div class="col-sm-<?= $leftmenuarr && $this->context->module->id!='rbacadmin' ? '9' : '12' ?>">
+                <?php
+                echo Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]); ?>
+                ]);
+                ?>
                 <h3>
                     <?= Yii::$app->session->getFlash('regsuccess') == '' ? '' : Yii::$app->session->getFlash('regsuccess'); ?>
                 </h3>
@@ -153,9 +157,7 @@ $leftmenuarr = [
                     <?= $content ?>
                 </div>
             </div>
-
         </div>
-
     </div>
 
 </div>
