@@ -6,8 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \mdm\admin\models\form\ChangePassword */
 
-//$this->title = Yii::t('rbac-admin', 'Change Password');
-$this->title = 'Change Password';
+$this->title = Yii::t('main', 'Change Password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">

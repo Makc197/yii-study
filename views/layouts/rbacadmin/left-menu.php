@@ -25,17 +25,17 @@ isset($goods) ? $goods['icon'] = 'folder-open' : '';
 $leftmenuarr = [
     [
         'url' => '/site/index',
-        'label' => 'Home',
+        'label' => Yii::t('main', 'Home'),
         'icon' => 'home'
     ],
 //  В центре нашего меню добавим каталог товаров
     $goods,
     [
-        'label' => 'Help',
+        'label' => Yii::t('main', 'Help'),
         'icon' => 'question-sign',
         'items' => [
-            ['label' => 'About', 'icon' => 'info-sign', 'url' => '/site/about'],
-            ['label' => 'Contact', 'icon' => 'phone', 'url' => '/site/contact'],
+            ['label' => Yii::t('main', 'About'), 'icon' => 'info-sign', 'url' => '/site/about'],
+            ['label' =>  Yii::t('main', 'Contact'), 'icon' => 'phone', 'url' => '/site/contact'],
         ],
     ],
 ];
@@ -61,7 +61,7 @@ $leftmenuarr = [
         // Displays SideNav menu
         echo SideNav::widget([
             'type' => SideNav::TYPE_DEFAULT,
-            'heading' => 'Menu',
+            'heading' => Yii::t('main', 'Menu'),
             'items' => $leftmenuarr,
         ]);
         ?>

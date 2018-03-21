@@ -27,39 +27,31 @@ isset($goods) ? $goods['icon'] = 'folder-open' : '';
 $leftmenuarr = [
     [
         'url' => '/site/index',
-        'label' => 'Home',
+        'label' => Yii::t('main', 'Home'),
         'icon' => 'home'
     ],
-//    [
-//        'url' => '/site/index',
-//        'label' => 'Goods',
-//        'icon' => 'circle-arrow-right',
-//        'items' => [
-//            ['label' => 'Книги', 'url' => '/book'],
-//            ['label' => 'Компакт диски', 'url' => '/cd'],
-//            ['label' => 'Прочие товары', 'url' => '/product'],
-//        ],
-//    ],
-//  В центре нашего меню добавим каталог товаров
+//  В центре LeftMenu добавим каталог товаров
     $goods,
     [
-        'label' => 'Help',
+        'label' => Yii::t('main', 'Help'),
+        //'url' => '/site/about',
         'icon' => 'question-sign',
         'items' => [
-            ['label' => 'About', 'icon' => 'info-sign', 'url' => '/site/about'],
-            ['label' => 'Contact', 'icon' => 'phone', 'url' => '/site/contact'],
+            ['label' => Yii::t('main', 'About'), 'icon' => 'info-sign', 'url' => '/site/about'],
+            ['label' => Yii::t('main', 'Contact'), 'icon' => 'phone', 'url' => '/site/contact'],
         ],
     ],
 ];
 
 //Убираем пустые элементы из массива
-function emptyArrayElement($arr){
+function emptyArrayElement($arr)
+{
     return (!empty($arr));
 }
 
-$leftmenuarr=array_filter($leftmenuarr, "emptyArrayElement");
-
+$leftmenuarr = array_filter($leftmenuarr, "emptyArrayElement");
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -83,41 +75,39 @@ $leftmenuarr=array_filter($leftmenuarr, "emptyArrayElement");
         ],
     ]);
 
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left'],
-        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true),
+    echo SearchWidget::widget([
+        'text' => '',
+//        'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple
+//        'type' => 'with_select'
+        'type' => 'simple'
     ]);
+
+    //    echo Nav::widget([
+    //        'options' => ['class' => 'navbar-nav navbar-right'],
+    //        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, null, null, true),
+    //    ]);
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+//          $goods,
             [
-                'label' => Yii::t('rbac-admin', 'Admin menu'),
+                'label' => Yii::t('main', 'Admin menu'),
                 'visible' => Yii::$app->user->can('admin'),
                 'url' => ['/rbacadmin/user']
             ],
             Yii::$app->user->isGuest ? (
-            ['label' => Yii::t('rbac-admin', 'SignIn') . ' (' . Yii::t('rbac-admin', 'Guest') . ')', 'url' => ['/user/login']]
+            ['label' => Yii::t('main', 'SignIn') . ' (' . Yii::t('main', 'Guest') . ')', 'url' => ['/user/login']]
             ) : (
-//                '<li>'.MultiLang::widget(['cssClass'=>'pull-right language']);.'</li>'
                 '<li>'
                 . Html::beginForm(['/user/logout'], 'post')
                 . Html::submitButton(
-                    Yii::t('rbac-admin', 'SignOut') . ' (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                    Yii::t('main', 'SignOut') . ' (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
                 . '</li>'
             )
         ],
-    ]);
-    ?>
-
-    <?=
-    SearchWidget::widget([
-        'text' => '',
-//        'type' => !Yii::$app->user->isGuest ? 'with_select' : 'simple
-//        'type' => 'with_select'
-        'type' => 'simple'
     ]);
     ?>
 
@@ -131,20 +121,20 @@ $leftmenuarr=array_filter($leftmenuarr, "emptyArrayElement");
 
         <div class="row">
 
-            <?php if ($leftmenuarr && $this->context->module->id!='rbacadmin') : ?>
-                <div class="col-sm-3">
+            <?php if ($leftmenuarr && $this->context->module->id != 'rbacadmin') : ?>
+                <div class="col-xs-3">
                     <?php
-                     // Displays SideNav menu
+                    // Displays SideNav menu
                     echo SideNav::widget([
                         'type' => SideNav::TYPE_DEFAULT,
-                        'heading' => 'Menu',
+                        'heading' => Yii::t('main', 'Menu'),
                         'items' => $leftmenuarr,
                     ]);
                     ?>
                 </div>
             <?php endif ?>
 
-            <div class="col-sm-<?= $leftmenuarr && $this->context->module->id!='rbacadmin' ? '9' : '12' ?>">
+            <div class="col-xs-<?= $leftmenuarr && $this->context->module->id != 'rbacadmin' ? '9' : '12' ?>">
                 <?php
                 echo Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

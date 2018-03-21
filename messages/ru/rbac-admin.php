@@ -17,6 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+	'Home' => 'Домой',
+	'Help' => 'Помощь',
+	'About' => 'О нас',
+	'Contact' => 'Обратная связь',
     'Assignments' => 'Назначения',
     'Users' => 'Пользователи',
     'User' => 'Пользователь',
@@ -71,7 +75,7 @@ return [
     'Add' => 'Добавить',
     'Assign' => 'Назначить',
     'Remove' => 'Удалить',
-    'Goods' => 'Товары',
+	'Goods' => 'Товары',
     'Books' => 'Книги',
     'CDs' => 'Компакт диски',
     'Products' => 'Прочие товары',
@@ -87,5 +91,6 @@ return [
     'reset it' => 'сбросить его',
     'signup' => 'зарегистрироваться',
     'Please fill out the following fields to login:' => 'Для авторизации необходимо заполнить поля: ',
+	'Change Password' => 'Смена пароля',
     ' --select rule' => ' --выберите правило',
 ];

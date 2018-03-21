@@ -3,6 +3,16 @@ body {
     height: 100%;
 }
 
+/*.navbar-form {*/
+    /*padding-right: 0px !important;*/
+    /*padding-left: 0px !important;*/
+/*}*/
+
+.nopadding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -96,9 +106,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
