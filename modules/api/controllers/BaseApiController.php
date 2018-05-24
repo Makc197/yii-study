@@ -7,23 +7,26 @@ use yii\rest\ActiveController;
 /**
  * Cd controller for the `api` module
  */
-abstract class BaseApiController extends ActiveController {
+abstract class BaseApiController extends ActiveController
+{
 
-    public function behaviors() {
+    public function behaviors()
+    {
         $behaviors = parent::behaviors();
 
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
+
             'cors' => [
                 // restrict access to
                 'Origin' => [
                     'http://yii-study',
                     'http://mysite.loc',
-					'http://localhost:8080',
-					'http://vue-js-first-app',
-					"*"
+                    'http://localhost:8888',
+                    'http://vue-js-first-app',
+                    "*"
                 ],
-                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+                'Access-Control-Request-Method' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
                 'Access-Control-Request-Headers' => ['Authorization', 'Content-Type'],
                 'Access-Control-Allow-Credentials' => true,
                 'Access-Control-Allow-Origin' => '*',
@@ -49,6 +52,13 @@ abstract class BaseApiController extends ActiveController {
 //                ],
 //            ],
 //        ];
+
+        $behaviors['verbFilter'] = [
+            'class' => \yii\filters\VerbFilter::className(),
+            'actions' => [
+                '*' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            ],
+        ];
 
         return $behaviors;
     }
